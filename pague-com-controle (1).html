@@ -41,14 +41,16 @@
   .hero-form input::placeholder { color: #aaa; }
   .btn-principal { background: var(--verde); color: var(--branco); border: none; padding: 0.85rem 1.8rem; border-radius: 100px; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 500; cursor: pointer; transition: background 0.2s, transform 0.15s; white-space: nowrap; }
   .btn-principal:hover { background: var(--verde-medio); transform: translateY(-2px); }
-  .btn-principal:active { transform: translateY(0); }
-  .hero-disclaimer { font-size: 0.78rem; color: #aaa; margin-top: 0.875rem; position: relative; z-index: 1; animation: fadeUp 0.6s 0.35s ease both; }
-  .hero-contador { display: flex; align-items: center; gap: 8px; margin-top: 1.5rem; font-size: 0.85rem; color: var(--texto-muted); position: relative; z-index: 1; animation: fadeUp 0.6s 0.4s ease both; }
+  .btn-principal:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+  .hero-disclaimer { font-size: 0.78rem; color: #aaa; margin-top: 0.875rem; position: relative; z-index: 1; }
+  .aviso-privacidade { display: flex; align-items: center; gap: 8px; margin-top: 0.75rem; background: var(--verde-menta); border: 1px solid rgba(26,74,58,0.15); border-radius: 12px; padding: 10px 16px; max-width: 480px; position: relative; z-index: 1; }
+  .aviso-privacidade p { font-size: 0.78rem; color: var(--verde); line-height: 1.5; text-align: left; font-weight: 400; }
+  .hero-contador { display: flex; align-items: center; gap: 8px; margin-top: 1.5rem; font-size: 0.85rem; color: var(--texto-muted); position: relative; z-index: 1; }
   .avatares { display: flex; }
   .av { width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--creme); margin-left: -8px; font-size: 11px; display: flex; align-items: center; justify-content: center; font-weight: 500; color: var(--branco); }
   .av:first-child { margin-left: 0; }
   .av1 { background: #2d6b55; } .av2 { background: #5a8a7a; } .av3 { background: #1a4a3a; }
-  .divisor { text-align: center; padding: 1rem 2rem; border-top: 1px solid var(--linha); border-bottom: 1px solid var(--linha); background: var(--verde-menta); overflow: hidden; }
+  .divisor { text-align: center; padding: 1rem 2rem; border-top: 1px solid var(--linha); border-bottom: 1px solid var(--linha); background: var(--verde-menta); }
   .divisor-inner { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; }
   .divisor-item { font-size: 0.82rem; color: var(--verde); font-weight: 500; display: flex; align-items: center; gap: 6px; padding: 0.6rem 0; }
   .divisor-item::before { content: '✓'; font-size: 0.75rem; }
@@ -65,7 +67,6 @@
   .funcionalidades { background: var(--verde); padding: 6rem 2rem; }
   .funcionalidades .inner { max-width: 1100px; margin: 0 auto; }
   .funcionalidades .secao-label { color: var(--verde-menta); opacity: 0.7; }
-  .funcionalidades h2 { color: var(--branco); }
   .feat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1px; margin-top: 3rem; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; overflow: hidden; }
   .feat-item { padding: 2rem 1.75rem; background: rgba(255,255,255,0.04); transition: background 0.2s; }
   .feat-item:hover { background: rgba(255,255,255,0.08); }
@@ -79,8 +80,6 @@
   .step p { font-size: 0.875rem; color: var(--texto-muted); line-height: 1.65; font-weight: 300; }
   .preco-secao { background: var(--creme-escuro); padding: 6rem 2rem; }
   .preco-inner { max-width: 480px; margin: 0 auto; text-align: center; }
-  .preco-inner .secao-label { text-align: center; }
-  .preco-inner h2 { max-width: 100%; text-align: center; margin: 0 auto; }
   .preco-card { background: var(--branco); border: 1px solid var(--linha); border-radius: 20px; padding: 2.5rem; margin-top: 2.5rem; position: relative; overflow: hidden; }
   .preco-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--verde); }
   .preco-lancamento { display: inline-block; background: var(--verde-menta); color: var(--verde); font-size: 0.75rem; font-weight: 500; padding: 4px 12px; border-radius: 100px; margin-bottom: 1.5rem; }
@@ -96,24 +95,29 @@
   .cta-final::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 60% at 50% 100%, rgba(61,140,110,0.3) 0%, transparent 70%); }
   .cta-final h2 { font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 5vw, 3.5rem); color: var(--branco); letter-spacing: -0.02em; line-height: 1.1; max-width: 600px; margin: 0 auto; position: relative; z-index: 1; }
   .cta-final h2 em { font-style: italic; color: rgba(255,255,255,0.6); }
-  .cta-final p { font-size: 1rem; color: rgba(255,255,255,0.6); margin-top: 1rem; font-weight: 300; position: relative; z-index: 1; }
+  .cta-final > p { font-size: 1rem; color: rgba(255,255,255,0.6); margin-top: 1rem; font-weight: 300; position: relative; z-index: 1; }
   .cta-final-form { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-top: 2rem; position: relative; z-index: 1; }
   .cta-final-form input { padding: 0.85rem 1.4rem; border: 1.5px solid rgba(255,255,255,0.2); border-radius: 100px; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; background: rgba(255,255,255,0.1); color: var(--branco); outline: none; transition: border-color 0.2s; }
   .cta-final-form input::placeholder { color: rgba(255,255,255,0.4); }
   .cta-final-form input:focus { border-color: rgba(255,255,255,0.5); }
   .btn-cta-final { background: var(--branco); color: var(--verde); border: none; padding: 0.85rem 1.8rem; border-radius: 100px; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 500; cursor: pointer; transition: opacity 0.2s, transform 0.15s; white-space: nowrap; }
   .btn-cta-final:hover { opacity: 0.9; transform: translateY(-2px); }
+  .btn-cta-final:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+  .aviso-cta { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 1rem; position: relative; z-index: 1; }
+  .aviso-cta p { font-size: 0.8rem; color: rgba(255,255,255,0.55); line-height: 1.5; }
   footer { padding: 2rem; text-align: center; border-top: 1px solid var(--linha); font-size: 0.8rem; color: var(--texto-muted); font-weight: 300; }
   @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
   .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
   .modal-overlay { display: none; position: fixed; inset: 0; z-index: 999; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; padding: 1rem; }
   .modal-overlay.aberto { display: flex; }
-  .modal { background: var(--branco); border-radius: 20px; padding: 2.5rem; max-width: 420px; width: 100%; text-align: center; animation: fadeUp 0.3s ease; }
-  .modal-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+  .modal { background: var(--branco); border-radius: 20px; padding: 2.5rem; max-width: 400px; width: 100%; text-align: center; animation: fadeUp 0.3s ease; }
+  .modal-icon { font-size: 2.8rem; margin-bottom: 1rem; }
   .modal h3 { font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: var(--verde); margin-bottom: 0.75rem; }
-  .modal p { font-size: 0.9rem; color: var(--texto-muted); line-height: 1.6; font-weight: 300; }
-  .btn-fechar { margin-top: 1.5rem; background: var(--verde); color: var(--branco); border: none; padding: 0.75rem 2rem; border-radius: 100px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 500; cursor: pointer; }
+  .modal-desc { font-size: 0.9rem; color: var(--texto-muted); line-height: 1.6; font-weight: 300; margin-bottom: 1.25rem; }
+  .modal-badge { display: inline-block; padding: 6px 16px; border-radius: 100px; font-size: 12px; font-weight: 500; background: var(--verde-menta); color: var(--verde); }
+  .btn-fechar { margin-top: 1.5rem; display: block; width: 100%; background: var(--verde); color: var(--branco); border: none; padding: 0.85rem; border-radius: 100px; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 500; cursor: pointer; transition: background 0.2s; }
+  .btn-fechar:hover { background: var(--verde-medio); }
   @media (max-width: 600px) {
     nav { padding: 1rem 1.25rem; }
     .hero-form { flex-direction: column; align-items: center; }
@@ -132,28 +136,22 @@
 
 <section class="hero">
   <div class="hero-bg"></div>
-  <div class="hero-badge">
-    <span class="badge-dot"></span>
-    Em breve — seja o primeiro a saber
-  </div>
+  <div class="hero-badge"><span class="badge-dot"></span> Em breve — seja o primeiro a saber</div>
   <h1>Nunca mais esqueça um<br><em>vencimento</em></h1>
   <p class="hero-sub">Cadastre suas contas uma vez. O Pague com Controle cuida dos alertas, dos prazos e do controle — para você só precisar pagar.</p>
-
-  <form class="hero-form" id="form-hero" onsubmit="cadastrar(event, 'hero')">
-    <input type="text" placeholder="Seu nome" id="nome-hero" style="width:200px;">
-    <input type="email" placeholder="Seu melhor e-mail" required id="email-hero" style="width:240px;">
+  <form class="hero-form" id="form-hero" onsubmit="cadastrar(event,'hero')">
+    <input type="text" placeholder="Seu nome" id="nome-hero" style="width:190px;">
+    <input type="email" placeholder="Seu melhor e-mail" required id="email-hero" style="width:230px;">
     <button type="submit" class="btn-principal" id="btn-hero">Garantir minha vaga</button>
   </form>
   <p class="hero-disclaimer">Sem spam. Só avisamos quando estiver pronto.</p>
-  <div style="display:flex;align-items:center;gap:8px;margin-top:0.75rem;background:var(--verde-menta);border:1px solid rgba(26,74,58,0.15);border-radius:12px;padding:10px 16px;max-width:480px;position:relative;z-index:1;">
+  <div class="aviso-privacidade">
     <span style="font-size:1.1rem;flex-shrink:0;">🔒</span>
-    <p style="font-size:0.78rem;color:var(--verde);line-height:1.5;text-align:left;font-weight:400;">Seu e-mail será usado <strong>exclusivamente</strong> para comunicações do Pague com Controle. Nunca compartilhamos seus dados com terceiros.</p>
+    <p>Seu e-mail será usado <strong>exclusivamente</strong> para comunicações do Pague com Controle. Nunca compartilhamos seus dados com terceiros.</p>
   </div>
   <div class="hero-contador">
     <div class="avatares">
-      <div class="av av1">M</div>
-      <div class="av av2">R</div>
-      <div class="av av3">C</div>
+      <div class="av av1">M</div><div class="av av2">R</div><div class="av av3">C</div>
     </div>
     <span>Primeiras pessoas já na lista de espera</span>
   </div>
@@ -173,21 +171,9 @@
   <p class="secao-label reveal">O problema</p>
   <h2 class="reveal">Você não esquece de pagar.<br>Você esquece <em>quando</em> pagar.</h2>
   <div class="problema-grid">
-    <div class="problema-card reveal">
-      <div class="num">01</div>
-      <h3>Contas espalhadas</h3>
-      <p>Cartão aqui, boleto lá, mensalidade em outro lugar. Não tem como lembrar de tudo sem uma lista centralizada.</p>
-    </div>
-    <div class="problema-card reveal">
-      <div class="num">02</div>
-      <h3>Multa e juros desnecessários</h3>
-      <p>Um dia de atraso já gera custo. E a pior parte: você só descobre depois, quando o estrago já foi feito.</p>
-    </div>
-    <div class="problema-card reveal">
-      <div class="num">03</div>
-      <h3>Planilhas que ninguém mantém</h3>
-      <p>Você cria, usa por duas semanas e abandona. Não é falta de disciplina — é falta de uma ferramenta que trabalhe por você.</p>
-    </div>
+    <div class="problema-card reveal"><div class="num">01</div><h3>Contas espalhadas</h3><p>Cartão aqui, boleto lá, mensalidade em outro lugar. Não tem como lembrar de tudo sem uma lista centralizada.</p></div>
+    <div class="problema-card reveal"><div class="num">02</div><h3>Multa e juros desnecessários</h3><p>Um dia de atraso já gera custo. E a pior parte: você só descobre depois, quando o estrago já foi feito.</p></div>
+    <div class="problema-card reveal"><div class="num">03</div><h3>Planilhas que ninguém mantém</h3><p>Você cria, usa por duas semanas e abandona. Não é falta de disciplina — é falta de uma ferramenta que trabalhe por você.</p></div>
   </div>
 </section>
 
@@ -251,14 +237,14 @@
 <section class="cta-final" id="cadastro">
   <h2>Entre na lista.<br><em>Seja o primeiro.</em></h2>
   <p>Aviso gratuito quando o Pague com Controle estiver pronto.</p>
-  <form class="cta-final-form" id="form-cta" onsubmit="cadastrar(event, 'cta')">
-    <input type="text" placeholder="Seu nome" id="nome-cta" style="width:200px;">
-    <input type="email" placeholder="Seu melhor e-mail" required id="email-cta" style="width:240px;">
+  <form class="cta-final-form" id="form-cta" onsubmit="cadastrar(event,'cta')">
+    <input type="text" placeholder="Seu nome" id="nome-cta" style="width:190px;">
+    <input type="email" placeholder="Seu melhor e-mail" required id="email-cta" style="width:230px;">
     <button type="submit" class="btn-cta-final" id="btn-cta">Garantir minha vaga</button>
   </form>
-  <div style="display:flex;align-items:center;justify-content:center;gap:6px;margin-top:1rem;position:relative;z-index:1;">
+  <div class="aviso-cta">
     <span style="font-size:0.9rem;">🔒</span>
-    <p style="font-size:0.8rem;color:rgba(255,255,255,0.55);line-height:1.5;">Seu e-mail será usado <strong style="color:rgba(255,255,255,0.8);">exclusivamente</strong> para comunicações do Pague com Controle. Seus dados nunca serão compartilhados.</p>
+    <p>Seu e-mail será usado <strong style="color:rgba(255,255,255,0.8);">exclusivamente</strong> para comunicações do Pague com Controle. Seus dados nunca serão compartilhados.</p>
   </div>
 </section>
 
@@ -266,95 +252,69 @@
   <p>© 2025 Pague com Controle · Contato: <a href="mailto:paguecomcontrole@gmail.com" style="color:var(--verde-claro);text-decoration:none;">paguecomcontrole@gmail.com</a></p>
 </footer>
 
+<!-- MODAL -->
 <div class="modal-overlay" id="modal-sucesso">
   <div class="modal">
     <div class="modal-icon" id="modal-icon">🎉</div>
-    <h3>Você está na lista!</h3>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:1.25rem 0;text-align:center;">
-      <div style="background:#f5f5f5;border-radius:10px;padding:10px 6px;">
-        <div style="font-size:11px;color:#888;margin-bottom:4px;">Posição</div>
-        <div style="font-size:1.4rem;font-weight:600;color:#1a4a3a;" id="modal-posicao">#1</div>
-      </div>
-      <div style="background:#f5f5f5;border-radius:10px;padding:10px 6px;">
-        <div style="font-size:11px;color:#888;margin-bottom:4px;">Plano</div>
-        <div style="font-size:1rem;font-weight:600;color:#1a4a3a;" id="modal-plano">Econômico</div>
-      </div>
-      <div style="background:#f5f5f5;border-radius:10px;padding:10px 6px;">
-        <div style="font-size:11px;color:#888;margin-bottom:4px;">Valor</div>
-        <div style="font-size:1rem;font-weight:600;color:#1a4a3a;" id="modal-valor">R$20/mês</div>
-      </div>
-    </div>
-    <p id="modal-desc">Parabéns! Você garantiu o plano Econômico com desconto vitalício.</p>
-    <div id="modal-badge" style="margin-top:1rem;display:inline-block;padding:6px 16px;border-radius:100px;font-size:12px;font-weight:500;background:#e8f5f0;color:#1a4a3a;">🔒 Desconto vitalício garantido</div>
-    <br>
-    <button class="btn-fechar" onclick="fecharModal()" style="margin-top:1.25rem;">Fechar</button>
+    <h3 id="modal-titulo">Você está na lista!</h3>
+    <p class="modal-desc" id="modal-desc">Parabéns! Você garantiu o plano Econômico com desconto vitalício. Avisaremos assim que o app for lançado.</p>
+    <div class="modal-badge" id="modal-badge">🔒 Desconto vitalício garantido</div>
+    <button class="btn-fechar" onclick="fecharModal()">Fechar</button>
   </div>
 </div>
 
 <script>
-  // ── CONFIGURAÇÃO ─────────────────────────────────────────
+  // ═══════════════════════════════════════════════════
+  // COLE AQUI A URL DO SEU APPS SCRIPT
+  // Como obter: Apps Script → Implantar → Gerenciar
+  // implantações → copie a URL do App da Web
+  // ═══════════════════════════════════════════════════
   const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzakG4xUfYiO42jzz7UXZXU7mMwodXiuc4Z1naT7oX3yv5N2uNWXtdCn1zB_ok6hfa1xg/exec";
 
-  // ── CADASTRO ─────────────────────────────────────────────
   async function cadastrar(e, origem) {
     e.preventDefault();
     const nome  = (document.getElementById("nome-"  + origem)?.value || "").trim();
     const email = (document.getElementById("email-" + origem)?.value || "").trim();
     const btn   = document.getElementById("btn-" + origem);
     if (!email) return;
+
     btn.disabled = true;
     btn.textContent = "Enviando...";
+
     try {
-      const resp = await fetch(APPS_SCRIPT_URL, {
-        method: "POST",
-        body: JSON.stringify({ nome, email, origem: "Landing Page" }),
+      // ─── CORREÇÃO CORS ────────────────────────────────
+      // Usamos mode:"no-cors" para contornar o bloqueio do
+      // navegador. O dado chega na planilha normalmente.
+      // Em troca, não conseguimos ler a resposta do servidor
+      // — por isso o modal mostra uma confirmação padrão.
+      // ─────────────────────────────────────────────────
+      await fetch(APPS_SCRIPT_URL, {
+        method:  "POST",
+        mode:    "no-cors",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body:    JSON.stringify({ nome, email, origem: "Landing Page" }),
       });
-      const data = await resp.json();
-      if (data.status === "ok") {
-        mostrarSucesso(data.posicao, data.plano, data.valor, data.desconto);
-        document.getElementById("form-" + origem).reset();
-      } else if (data.status === "duplicado") {
-        mostrarDuplicado();
-      } else {
-        mostrarErro();
-      }
+
+      // Considera sucesso e mostra modal
+      mostrarSucesso();
+      document.getElementById("form-" + origem).reset();
+
     } catch(err) {
-      mostrarErro();
+      alert("Não foi possível enviar. Tente novamente ou entre em contato: paguecomcontrole@gmail.com");
     } finally {
       btn.disabled = false;
       btn.textContent = "Garantir minha vaga";
     }
   }
 
-  function mostrarSucesso(posicao, plano, valor, desconto) {
-    const economico = desconto === "SIM";
-    document.getElementById("modal-icon").textContent    = economico ? "🎉" : "✅";
-    document.getElementById("modal-posicao").textContent = "#" + posicao;
-    document.getElementById("modal-plano").textContent   = plano;
-    document.getElementById("modal-valor").textContent   = valor + "/mês";
-    document.getElementById("modal-desc").textContent    = economico
-      ? "Parabéns! Você garantiu o plano Econômico com desconto vitalício."
-      : "Você está na lista! Será avisado assim que o app for lançado.";
-    document.getElementById("modal-badge").textContent   = economico ? "🔒 Desconto vitalício garantido" : "📬 Você será avisado no lançamento";
-    document.getElementById("modal-badge").style.background = economico ? "#e8f5f0" : "#e3f2fd";
-    document.getElementById("modal-badge").style.color      = economico ? "#1a4a3a" : "#0d47a1";
+  function mostrarSucesso() {
+    document.getElementById("modal-icon").textContent  = "🎉";
+    document.getElementById("modal-titulo").textContent = "Você está na lista!";
+    document.getElementById("modal-desc").textContent  = "Ótimo! Assim que o Pague com Controle for lançado, você será um dos primeiros a saber — e garante o melhor preço.";
+    document.getElementById("modal-badge").textContent = "🔒 Vaga garantida";
+    document.getElementById("modal-badge").style.background = "#e8f5f0";
+    document.getElementById("modal-badge").style.color      = "#1a4a3a";
     document.getElementById("modal-sucesso").classList.add("aberto");
-  }
-
-  function mostrarDuplicado() {
-    document.getElementById("modal-icon").textContent    = "⚠️";
-    document.getElementById("modal-posicao").textContent = "—";
-    document.getElementById("modal-plano").textContent   = "—";
-    document.getElementById("modal-valor").textContent   = "—";
-    document.getElementById("modal-desc").textContent    = "Este e-mail já está cadastrado na nossa lista. Obrigado pelo interesse!";
-    document.getElementById("modal-badge").textContent   = "📋 Cadastro já registrado";
-    document.getElementById("modal-badge").style.background = "#fff3e0";
-    document.getElementById("modal-badge").style.color      = "#e65100";
-    document.getElementById("modal-sucesso").classList.add("aberto");
-  }
-
-  function mostrarErro() {
-    alert("Ocorreu um erro ao enviar. Por favor, tente novamente ou entre em contato: paguecomcontrole@gmail.com");
   }
 
   function fecharModal() {
