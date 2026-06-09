@@ -262,28 +262,43 @@
 </div>
 
 <script>
-  function enviar(e, origem) {
+  // ── FORMSPREE — captura de inscrições ──────────────────
+  const FORMSPREE_URL = "https://formspree.io/f/mnjyvnqa";
+
+  async function enviar(e, origem) {
     e.preventDefault();
     const nome  = (document.getElementById("nome-"  + origem)?.value || "").trim();
     const email = (document.getElementById("email-" + origem)?.value || "").trim();
+    const btn   = document.getElementById("btn-" + origem);
     if (!email) return;
 
-    // Monta o e-mail e abre o cliente de e-mail do usuário
-    const assunto = encodeURIComponent("Nova inscrição — Pague com Controle");
-    const corpo   = encodeURIComponent(
-      "Nova inscrição na lista de espera:\n\n" +
-      "Nome:  " + (nome || "Não informado") + "\n" +
-      "Email: " + email + "\n" +
-      "Data:  " + new Date().toLocaleString("pt-BR", {timeZone:"America/Sao_Paulo"}) + "\n" +
-      "Origem: Landing Page"
-    );
+    btn.disabled = true;
+    btn.textContent = "Enviando...";
 
-    window.location.href =
-      "mailto:paguecomcontrole@gmail.com?subject=" + assunto + "&body=" + corpo;
+    try {
+      const resp = await fetch(FORMSPREE_URL, {
+        method:  "POST",
+        headers: { "Accept": "application/json", "Content-Type": "application/json" },
+        body:    JSON.stringify({
+          nome:   nome || "Não informado",
+          email:  email,
+          origem: "Landing Page",
+          data:   new Date().toLocaleString("pt-BR", {timeZone:"America/Sao_Paulo"})
+        })
+      });
 
-    // Mostra modal de confirmação
-    document.getElementById("modal").classList.add("aberto");
-    document.getElementById("form-" + origem).reset();
+      if (resp.ok) {
+        document.getElementById("modal").classList.add("aberto");
+        document.getElementById("form-" + origem).reset();
+      } else {
+        alert("Não foi possível enviar. Tente novamente ou escreva para paguecomcontrole@gmail.com");
+      }
+    } catch(err) {
+      alert("Erro de conexão. Tente novamente ou escreva para paguecomcontrole@gmail.com");
+    } finally {
+      btn.disabled = false;
+      btn.textContent = "Garantir minha vaga";
+    }
   }
 
   function fecharModal() {
