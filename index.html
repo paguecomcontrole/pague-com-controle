@@ -1,139 +1,205 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pague com Controle</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pague com Controle — Nunca mais esqueça um vencimento</title>
+  <meta name="description" content="Organize suas contas, receba alertas inteligentes e nunca mais pague juros por esquecimento.">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+  </style>
 </head>
-<body class="bg-stone-50 text-green-900 font-sans antialiased">
+<body class="bg-stone-50 text-green-900 antialiased">
 
-  <!-- CABEÇALHO -->
+  <!-- 1. Cabeçalho -->
   <header class="w-full bg-stone-50 border-b border-green-900/10">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <div class="flex items-center gap-2 font-bold text-2xl text-green-900">
-        <span class="text-3xl">✅</span>
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-2 font-extrabold text-xl tracking-tight">
+        <i data-lucide="shield-check" class="w-7 h-7"></i>
         Pague com Controle
-      </div>
-      <a href="#cadastro" class="inline-flex items-center justify-center bg-green-900 text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-green-800 transition shadow-sm">
+      </a>
+      <a href="#captura" class="hidden sm:inline-flex items-center gap-2 bg-green-900 text-white px-5 py-2.5 rounded-lg font-semibold hover:bg-green-800 transition">
         Quero ser avisado
       </a>
     </div>
   </header>
 
-  <!-- HERO SECTION -->
-  <section id="cadastro" class="w-full bg-stone-50 py-20 md:py-28">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h1 class="text-4xl md:text-6xl font-extrabold text-green-900 leading-tight mb-6">
+  <!-- 2. Hero -->
+  <section class="w-full bg-stone-50 py-20 md:py-28">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6">
         Nunca mais esqueça um vencimento
       </h1>
-      <p class="text-lg md:text-xl text-green-800/80 mb-10 max-w-2xl mx-auto">
-        Receba lembretes inteligentes, organize seus pagamentos e mantenha suas contas sempre em dia — sem complicação.
+      <p class="text-lg md:text-xl text-green-900/80 mb-10 max-w-2xl mx-auto">
+        Receba alertas inteligentes, organize suas contas e pare de pagar multas por esquecimento.
       </p>
 
-      <form action="#" class="w-full max-w-xl mx-auto bg-white p-6 md:p-8 rounded-2xl shadow-lg border border-green-900/10">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-          <input type="text" name="nome" placeholder="Seu nome" required
-                 class="w-full px-4 py-3 rounded-lg border border-green-900/20 bg-stone-50 text-green-900 placeholder-green-900/40 focus:outline-none focus:ring-2 focus:ring-green-900 focus:border-transparent" />
-          <input type="email" name="email" placeholder="Seu melhor e-mail" required
-                 class="w-full px-4 py-3 rounded-lg border border-green-900/20 bg-stone-50 text-green-900 placeholder-green-900/40 focus:outline-none focus:ring-2 focus:ring-green-900 focus:border-transparent" />
-        </div>
-        <button type="submit" class="w-full bg-green-900 text-white py-3.5 rounded-lg font-bold text-lg hover:bg-green-800 transition shadow-md">
+      <form id="captura" class="max-w-md mx-auto bg-white rounded-2xl p-2 shadow-lg border border-green-900/10 flex flex-col sm:flex-row gap-2">
+        <input type="email" placeholder="Digite seu melhor e-mail" required class="flex-1 px-4 py-3 rounded-xl outline-none text-green-900 placeholder-green-900/40">
+        <button type="submit" class="bg-green-900 text-white px-6 py-3 rounded-xl font-semibold hover:bg-green-800 transition whitespace-nowrap">
           Quero ser avisado
         </button>
-        <p class="text-sm text-green-800/60 mt-4">Sem spam. Cancele a qualquer momento.</p>
       </form>
+      <p class="text-sm text-green-900/60 mt-4">Entre para a lista de espera. Sem spam, só avisos importantes.</p>
     </div>
   </section>
 
-  <!-- SEÇÃO DE PREÇO -->
-  <section class="w-full bg-stone-50 py-20 md:py-28">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <span class="inline-block bg-green-100 border border-green-900 text-green-900 px-5 py-2.5 rounded-full text-sm md:text-base font-bold mb-10">
-        🔥 Oferta para os primeiros 100 inscritos — R$ 15/mês por 24 meses
-      </span>
-
-      <h2 class="text-3xl md:text-4xl font-bold text-green-900 mb-12">
-        Escolha seu plano
+  <!-- 3. O Problema -->
+  <section class="w-full bg-stone-50 py-20 md:py-24">
+    <div class="max-w-6xl mx-auto px-6">
+      <p class="text-sm font-bold tracking-widest text-green-900/60 uppercase mb-3">O Problema</p>
+      <h2 class="text-3xl md:text-4xl font-extrabold mb-12 max-w-2xl">
+        Você não esquece de pagar. Você esquece quando pagar.
       </h2>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-stretch">
-        <!-- Card 1: Destaque verde -->
-        <div class="relative flex flex-col justify-between bg-green-900 text-white rounded-2xl p-8 shadow-2xl">
-          <span class="absolute top-0 right-0 bg-white text-green-900 text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-2xl">
-            MAIS POPULAR
-          </span>
-          <div>
-            <h3 class="text-xl font-bold tracking-wide uppercase mb-2">Primeiros 100</h3>
-            <p class="text-green-100/80 text-sm mb-6">Vagas limitadas para early adopters</p>
-            <div class="flex items-baseline justify-center gap-1 mb-6">
-              <span class="text-lg">R$</span>
-              <span class="text-6xl font-extrabold">15</span>
-              <span class="text-lg">/mês</span>
-            </div>
-            <p class="text-green-100/90 mb-6">por 24 meses</p>
-            <ul class="text-left space-y-3 mb-8 text-green-50">
-              <li class="flex items-start gap-2"><span class="font-bold">✓</span> Lembretes automáticos de vencimento</li>
-              <li class="flex items-start gap-2"><span class="font-bold">✓</span> Controle de todas as contas em um só lugar</li>
-              <li class="flex items-start gap-2"><span class="font-bold">✓</span> Relatórios mensais de gastos</li>
-              <li class="flex items-start gap-2"><span class="font-bold">✓</span> Suporte prioritário</li>
-            </ul>
-          </div>
-          <a href="#cadastro" class="w-full inline-block bg-white text-green-900 text-center py-3.5 rounded-lg font-bold text-lg hover:bg-stone-100 transition">
-            Garantir minha vaga
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-2xl p-8 shadow-sm border border-green-900/10">
+          <span class="text-4xl font-extrabold text-green-900/20">01</span>
+          <h3 class="text-xl font-bold mt-4 mb-2">Contas espalhadas</h3>
+          <p class="text-green-900/70">Boleto no e-mail, fatura no app, recibo no WhatsApp. Impossível saber o que vence quando.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-8 shadow-sm border border-green-900/10">
+          <span class="text-4xl font-extrabold text-green-900/20">02</span>
+          <h3 class="text-xl font-bold mt-4 mb-2">Multa e juros desnecessários</h3>
+          <p class="text-green-900/70">Um atraso de um dia já gera multa. Dinheiro que poderia estar no seu bolso.</p>
+        </div>
+        <div class="bg-white rounded-2xl p-8 shadow-sm border border-green-900/10">
+          <span class="text-4xl font-extrabold text-green-900/20">03</span>
+          <h3 class="text-xl font-bold mt-4 mb-2">Planilhas que ninguém mantém</h3>
+          <p class="text-green-900/70">Você cria, preenche uma semana e abandona. Precisa de algo que funcione sozinho.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. O Que Você Vai Ter -->
+  <section class="w-full bg-green-900 text-white py-20 md:py-24">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-3xl md:text-4xl font-extrabold mb-12 text-center">
+        Tudo que você precisa. Nada que você não usa.
+      </h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-green-800 rounded-2xl p-8 border border-green-700">
+          <i data-lucide="bell-ring" class="w-8 h-8 mb-4"></i>
+          <h3 class="text-xl font-bold mb-2">Alertas inteligentes</h3>
+          <p class="text-green-100/80">Avisos no dia certo, por e-mail e notificação, para você pagar no tempo certo.</p>
+        </div>
+        <div class="bg-green-800 rounded-2xl p-8 border border-green-700">
+          <i data-lucide="plus-circle" class="w-8 h-8 mb-4"></i>
+          <h3 class="text-xl font-bold mb-2">Cadastro simples</h3>
+          <p class="text-green-100/80">Adicione uma conta em segundos. Sem planilhas complexas e sem burocracia.</p>
+        </div>
+        <div class="bg-green-800 rounded-2xl p-8 border border-green-700">
+          <i data-lucide="calendar-days" class="w-8 h-8 mb-4"></i>
+          <h3 class="text-xl font-bold mb-2">Visão do mês completo</h3>
+          <p class="text-green-100/80">Veja tudo o que vence no mês de um jeito claro e organizado.</p>
+        </div>
+        <div class="bg-green-800 rounded-2xl p-8 border border-green-700">
+          <i data-lucide="bar-chart-3" class="w-8 h-8 mb-4"></i>
+          <h3 class="text-xl font-bold mb-2">Relatório mensal</h3>
+          <p class="text-green-100/80">Entenda para onde vai seu dinheiro e tome decisões com mais controle.</p>
+        </div>
+        <div class="bg-green-800 rounded-2xl p-8 border border-green-700">
+          <i data-lucide="smartphone" class="w-8 h-8 mb-4"></i>
+          <h3 class="text-xl font-bold mb-2">Funciona no celular</h3>
+          <p class="text-green-100/80">Acesse de qualquer lugar. A tela se adapta perfeitamente ao seu smartphone.</p>
+        </div>
+        <div class="bg-green-800 rounded-2xl p-8 border border-green-700">
+          <i data-lucide="lock" class="w-8 h-8 mb-4"></i>
+          <h3 class="text-xl font-bold mb-2">Seus dados só seus</h3>
+          <p class="text-green-100/80">Privacidade e segurança em primeiro lugar. Sem vender dados para terceiros.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Como Funciona -->
+  <section class="w-full bg-stone-50 py-20 md:py-24">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-3xl md:text-4xl font-extrabold mb-12 text-center">
+        Três passos. Zero complicação.
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="text-center">
+          <div class="w-16 h-16 mx-auto bg-green-900 text-white rounded-full flex items-center justify-center text-2xl font-extrabold mb-4">01</div>
+          <h3 class="text-xl font-bold mb-2">Crie sua conta</h3>
+          <p class="text-green-900/70">Cadastro rápido com e-mail. Você estará pronto em menos de um minuto.</p>
+        </div>
+        <div class="text-center">
+          <div class="w-16 h-16 mx-auto bg-green-900 text-white rounded-full flex items-center justify-center text-2xl font-extrabold mb-4">02</div>
+          <h3 class="text-xl font-bold mb-2">Cadastre suas contas</h3>
+          <p class="text-green-900/70">Adicione cada conta com vencimento e valor. Organize do seu jeito.</p>
+        </div>
+        <div class="text-center">
+          <div class="w-16 h-16 mx-auto bg-green-900 text-white rounded-full flex items-center justify-center text-2xl font-extrabold mb-4">03</div>
+          <h3 class="text-xl font-bold mb-2">Receba os alertas</h3>
+          <p class="text-green-900/70">O sistema avisa você no dia certo. Basta pagar e ficar tranquilo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Investimento (A Oferta) -->
+  <section class="w-full bg-stone-50 py-20 md:py-24">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Simples e transparente.</h2>
+
+      <div class="inline-flex items-center gap-2 bg-orange-100 text-orange-900 px-4 py-2 rounded-full text-sm font-semibold mb-10">
+        <span>🔥</span>
+        Oferta para os primeiros 100 inscritos — R$ 15/mês por 24 meses
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-green-900 text-white rounded-2xl p-8 shadow-lg relative">
+          <span class="absolute top-4 right-4 bg-white text-green-900 text-xs font-bold px-3 py-1 rounded-full">MAIS POPULAR</span>
+          <h3 class="text-xl font-bold mb-2">PRIMEIROS 100</h3>
+          <div class="text-5xl font-extrabold mb-4">R$ 15<span class="text-xl font-medium">/mês</span></div>
+          <p class="text-green-100/90 mb-6">Válido por 24 meses. Garanta sua vaga na lista de espera.</p>
+          <a href="#captura" class="block w-full bg-white text-green-900 font-bold py-3 rounded-xl hover:bg-green-50 transition">
+            Quero essa oferta
           </a>
         </div>
 
-        <!-- Card 2: Branco com borda -->
-        <div class="flex flex-col justify-between bg-white border-2 border-green-900 text-green-900 rounded-2xl p-8 shadow-md">
-          <div>
-            <h3 class="text-xl font-bold tracking-wide uppercase mb-2">Demais inscritos</h3>
-            <p class="text-green-800/70 text-sm mb-6">Preço regular após as primeiras vagas</p>
-            <div class="flex items-baseline justify-center gap-1 mb-6">
-              <span class="text-lg">R$</span>
-              <span class="text-6xl font-extrabold line-through decoration-2">20</span>
-              <span class="text-lg">/mês</span>
-            </div>
-            <p class="text-green-800/70 mb-6">Economize entrando na fila de espera</p>
-            <ul class="text-left space-y-3 mb-8 text-green-900/90">
-              <li class="flex items-start gap-2"><span class="font-bold">✓</span> Lembretes automáticos de vencimento</li>
-              <li class="flex items-start gap-2"><span class="font-bold">✓</span> Controle de todas as contas em um só lugar</li>
-              <li class="flex items-start gap-2"><span class="font-bold">✓</span> Relatórios mensais de gastos</li>
-              <li class="flex items-start gap-2"><span class="font-bold">✓</span> Suporte por e-mail</li>
-            </ul>
-          </div>
-          <a href="#cadastro" class="w-full inline-block bg-green-900 text-white text-center py-3.5 rounded-lg font-bold text-lg hover:bg-green-800 transition">
-            Quero ser avisado
+        <div class="bg-white border-2 border-green-900 rounded-2xl p-8">
+          <h3 class="text-xl font-bold mb-2">DEMAIS INSCRITOS</h3>
+          <div class="text-4xl font-extrabold text-green-900/40 line-through mb-4">R$ 20<span class="text-lg font-medium">/mês</span></div>
+          <p class="text-green-900/70 mb-6">Valor normal após esgotar as 100 vagas com desconto.</p>
+          <a href="#captura" class="block w-full bg-green-900 text-white font-bold py-3 rounded-xl hover:bg-green-800 transition">
+            Entrar na lista de espera
           </a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- RODAPÉ VERDE ESCURO -->
+  <!-- 7. Rodapé -->
   <footer class="w-full bg-green-900 text-white py-16">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h3 class="text-2xl md:text-3xl font-bold mb-4">
-        Não perca a chance de pagar com controle
-      </h3>
-      <p class="text-green-100/80 mb-8 max-w-xl mx-auto">
-        Deixe seu e-mail e seja avisado assim que abrirmos novas vagas.
-      </p>
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h2 class="text-2xl md:text-3xl font-extrabold mb-4">Não deixe o dinheiro ir embora por esquecimento.</h2>
+      <p class="text-green-100/80 mb-8">Cadastre seu e-mail e seja avisado assim que o Pague com Controle estiver disponível.</p>
 
-      <form action="#" class="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-lg mx-auto">
-        <input type="email" name="email_footer" placeholder="Seu melhor e-mail" required
-               class="w-full sm:flex-1 px-4 py-3 rounded-lg bg-white text-green-900 placeholder-green-900/50 focus:outline-none focus:ring-2 focus:ring-green-300" />
-        <button type="submit" class="w-full sm:w-auto bg-white text-green-900 px-6 py-3 rounded-lg font-bold hover:bg-stone-100 transition">
-          Avisar-me
+      <form class="max-w-md mx-auto bg-green-800 rounded-2xl p-2 flex flex-col sm:flex-row gap-2 border border-green-700">
+        <input type="email" placeholder="Digite seu melhor e-mail" required class="flex-1 px-4 py-3 rounded-xl outline-none bg-green-900 text-white placeholder-green-100/50">
+        <button type="submit" class="bg-white text-green-900 px-6 py-3 rounded-xl font-bold hover:bg-green-50 transition whitespace-nowrap">
+          Quero ser avisado
         </button>
       </form>
 
-      <p class="text-sm text-green-200/70 mt-10">
+      <div class="mt-12 pt-8 border-t border-green-800 text-green-100/60 text-sm">
         © 2024 Pague com Controle. Todos os direitos reservados.
-      </p>
+      </div>
     </div>
   </footer>
 
+  <script>
+    lucide.createIcons();
+  </script>
 </body>
 </html>
-
