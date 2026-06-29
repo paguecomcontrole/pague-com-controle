@@ -1,257 +1,336 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pague com Controle</title>
-  <meta name="description" content="Nunca mais esqueça uma conta. Pague com Controle organiza seus vencimentos para você." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pague com Controle | Organize suas contas e pare de pagar juros</title>
+  <meta name="description" content="Assuma o controle dos seus pagamentos com lembretes automáticos, visão clara das contas e economia real todo mês.">
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: { sans: ['Inter', 'sans-serif'] },
-          colors: { brand: { cream: '#F9F7F2', green: '#2D5A46' } }
-        }
-      }
-    }
-  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    html { scroll-behavior: smooth; }
-    .glass-card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(8px); }
+    body { font-family: 'Inter', sans-serif; }
+    .scroll-smooth { scroll-behavior: smooth; }
   </style>
 </head>
-<body class="bg-[#F9F7F2] text-slate-800 antialiased">
+<body class="bg-[#F9F7F2] text-gray-800 scroll-smooth">
 
-  <!-- Navbar -->
-  <nav class="fixed top-0 left-0 w-full z-50 bg-[#F9F7F2]/90 backdrop-blur-md border-b border-[#2D5A46]/10">
-    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-      <a href="#" class="text-2xl font-extrabold text-[#2D5A46] tracking-tight">Pague com Controle</a>
-      <a href="#inscricao" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 rounded-full bg-[#2D5A46] text-white font-semibold text-sm hover:bg-[#234B39] transition shadow-lg shadow-[#2D5A46]/20">
-        Quero ser avisado
-      </a>
+  <!-- 1. Navbar -->
+  <nav class="sticky top-0 z-50 bg-[#F9F7F2]/95 backdrop-blur-sm border-b border-[#2D5A46]/10">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="#" class="flex items-center gap-2">
+          <div class="w-8 h-8 bg-[#2D5A46] rounded-lg flex items-center justify-center">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+          </div>
+          <span class="font-bold text-lg text-[#2D5A46]">Pague com Controle</span>
+        </a>
+        <a href="#oferta" class="hidden sm:inline-flex items-center px-4 py-2 bg-[#2D5A46] text-white font-semibold rounded-lg hover:bg-[#234839] transition-colors">
+          Garantir Vaga
+        </a>
+      </div>
     </div>
   </nav>
 
-  <!-- Hero -->
-  <section class="pt-32 pb-20 lg:pt-44 lg:pb-28 px-6">
-    <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
-      <div>
-        <span class="inline-block px-4 py-1.5 rounded-full bg-[#2D5A46]/10 text-[#2D5A46] text-sm font-semibold mb-6">
-          Em breve para você
-        </span>
-        <h1 class="text-4xl lg:text-5xl xl:text-6xl font-extrabold leading-tight text-[#2D5A46] mb-6">
-          Nunca mais esqueça uma conta para pagar.
-        </h1>
-        <p class="text-lg lg:text-xl text-slate-600 mb-8 max-w-xl">
-          Receba alertas inteligentes, organize seus vencimentos e pare de perder dinheiro com multas. Simples, seguro e feito para o seu dia a dia.
-        </p>
-        <div class="flex flex-wrap gap-4 text-sm font-medium text-slate-600">
-          <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-[#2D5A46]"></span>Sem planilhas</div>
-          <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-[#2D5A46]"></span>Sem esquecimentos</div>
-          <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-[#2D5A46]"></span>Sem surpresas</div>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-3xl p-8 lg:p-10 shadow-2xl shadow-[#2D5A46]/10 border border-[#2D5A46]/10">
-        <h2 class="text-2xl font-bold text-[#2D5A46] mb-2">Entre na lista de espera</h2>
-        <p class="text-slate-600 mb-6">Seja avisado assim que o Pague com Controle estiver disponível.</p>
-        <form id="hero-form" class="space-y-4">
-          <div>
-            <label for="hero-nome" class="block text-sm font-semibold text-slate-700 mb-1">Nome</label>
-            <input id="hero-nome" name="nome" type="text" required placeholder="Seu nome completo" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#2D5A46] focus:border-[#2D5A46] bg-[#F9F7F2]" />
-          </div>
-          <div>
-            <label for="hero-email" class="block text-sm font-semibold text-slate-700 mb-1">E-mail</label>
-            <input id="hero-email" name="email" type="email" required placeholder="seu@email.com" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#2D5A46] focus:border-[#2D5A46] bg-[#F9F7F2]" />
-          </div>
-          <button type="submit" class="submit-btn w-full px-6 py-4 rounded-xl bg-[#2D5A46] text-white font-bold text-lg hover:bg-[#234B39] transition shadow-lg shadow-[#2D5A46]/20">
-            Quero ser avisado
-          </button>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <!-- O Problema -->
-  <section class="py-20 px-6 bg-white">
-    <div class="max-w-6xl mx-auto">
-      <div class="text-center max-w-2xl mx-auto mb-14">
-        <h2 class="text-3xl lg:text-4xl font-bold text-[#2D5A46] mb-4">O problema que você conhece bem</h2>
-        <p class="text-lg text-slate-600">Sem um controle simples, o dinheiro vai embora sem você perceber.</p>
-      </div>
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="bg-[#F9F7F2] rounded-2xl p-8 border border-[#2D5A46]/10 hover:shadow-lg transition">
-          <div class="w-12 h-12 rounded-xl bg-[#2D5A46]/10 flex items-center justify-center text-[#2D5A46] mb-5">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" /></svg>
-          </div>
-          <h3 class="text-xl font-bold text-[#2D5A46] mb-3">Contas espalhadas</h3>
-          <p class="text-slate-600 leading-relaxed">Boletos, faturas, mensalidades e assinaturas espalhados por e-mails, apps e papéis.</p>
-        </div>
-        <div class="bg-[#F9F7F2] rounded-2xl p-8 border border-[#2D5A46]/10 hover:shadow-lg transition">
-          <div class="w-12 h-12 rounded-xl bg-[#2D5A46]/10 flex items-center justify-center text-[#2D5A46] mb-5">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
-          </div>
-          <h3 class="text-xl font-bold text-[#2D5A46] mb-3">Multa e juros</h3>
-          <p class="text-slate-600 leading-relaxed">Esquecer um vencimento é sinônimo de pagar a mais no mês seguinte. Dinheiro jogado fora.</p>
-        </div>
-        <div class="bg-[#F9F7F2] rounded-2xl p-8 border border-[#2D5A46]/10 hover:shadow-lg transition">
-          <div class="w-12 h-12 rounded-xl bg-[#2D5A46]/10 flex items-center justify-center text-[#2D5A46] mb-5">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
-          </div>
-          <h3 class="text-xl font-bold text-[#2D5A46] mb-3">Planilhas abandonadas</h3>
-          <p class="text-slate-600 leading-relaxed">Você começa a organizar, mas depois de algumas semanas a planilha fica esquecida no computador.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- O Que Você Vai Ter -->
-  <section class="py-20 px-6">
-    <div class="max-w-6xl mx-auto">
-      <div class="text-center max-w-2xl mx-auto mb-14">
-        <h2 class="text-3xl lg:text-4xl font-bold text-[#2D5A46] mb-4">O que você vai ter</h2>
-        <p class="text-lg text-slate-600">Tudo que você precisa para manter as contas em dia sem complicação.</p>
-      </div>
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="bg-white rounded-2xl p-8 border border-[#2D5A46]/10 hover:-translate-y-1 transition duration-300">
-          <div class="w-12 h-12 rounded-xl bg-[#2D5A46]/10 flex items-center justify-center text-[#2D5A46] mb-5">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
-          </div>
-          <h3 class="text-xl font-bold text-[#2D5A46] mb-3">Alertas inteligentes</h3>
-          <p class="text-slate-600 leading-relaxed">Receba lembretes no dia e na hora certa para você pagar tudo em dia.</p>
-        </div>
-        <div class="bg-white rounded-2xl p-8 border border-[#2D5A46]/10 hover:-translate-y-1 transition duration-300">
-          <div class="w-12 h-12 rounded-xl bg-[#2D5A46]/10 flex items-center justify-center text-[#2D5A46] mb-5">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
-          </div>
-          <h3 class="text-xl font-bold text-[#2D5A46] mb-3">Cadastro simples</h3>
-          <p class="text-slate-600 leading-relaxed">Adicione suas contas em poucos cliques e deixe o sistema cuidar do resto.</p>
-        </div>
-        <div class="bg-white rounded-2xl p-8 border border-[#2D5A46]/10 hover:-translate-y-1 transition duration-300">
-          <div class="w-12 h-12 rounded-xl bg-[#2D5A46]/10 flex items-center justify-center text-[#2D5A46] mb-5">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
-          </div>
-          <h3 class="text-xl font-bold text-[#2D5A46] mb-3">Relatório mensal</h3>
-          <p class="text-slate-600 leading-relaxed">Veja para onde está indo o seu dinheiro e identifique gastos que podem ser evitados.</p>
-        </div>
-        <div class="bg-white rounded-2xl p-8 border border-[#2D5A46]/10 hover:-translate-y-1 transition duration-300">
-          <div class="w-12 h-12 rounded-xl bg-[#2D5A46]/10 flex items-center justify-center text-[#2D5A46] mb-5">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
-          </div>
-          <h3 class="text-xl font-bold text-[#2D5A46] mb-3">Funciona no celular e PC</h3>
-          <p class="text-slate-600 leading-relaxed">Acesse de qualquer lugar. O Pague com Controle se adapta à sua tela.</p>
-        </div>
-        <div class="bg-white rounded-2xl p-8 border border-[#2D5A46]/10 hover:-translate-y-1 transition duration-300">
-          <div class="w-12 h-12 rounded-xl bg-[#2D5A46]/10 flex items-center justify-center text-[#2D5A46] mb-5">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-          </div>
-          <h3 class="text-xl font-bold text-[#2D5A46] mb-3">Preço Justo</h3>
-          <p class="text-slate-600 leading-relaxed">Tenha sua vida financeira organizada pagando menos que um lanche por mês. Sem taxas ocultas e sem surpresas.</p>
-        </div>
-        <div class="bg-white rounded-2xl p-8 border border-[#2D5A46]/10 hover:-translate-y-1 transition duration-300">
-          <div class="w-12 h-12 rounded-xl bg-[#2D5A46]/10 flex items-center justify-center text-[#2D5A46] mb-5">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
-          </div>
-          <h3 class="text-xl font-bold text-[#2D5A46] mb-3">Indique e use de graça</h3>
-          <p class="text-slate-600 leading-relaxed">A cada amigo que você indicar, você ganha descontos. Indique 15 amigos ativos e a sua mensalidade sai 100% de graça!</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Como Funciona -->
-  <section class="py-20 px-6 bg-white">
-    <div class="max-w-6xl mx-auto">
-      <div class="text-center max-w-2xl mx-auto mb-14">
-        <h2 class="text-3xl lg:text-4xl font-bold text-[#2D5A46] mb-4">Como funciona</h2>
-        <p class="text-lg text-slate-600">Três passos simples para nunca mais perder o controle.</p>
-      </div>
-      <div class="grid md:grid-cols-3 gap-8 relative">
-        <div class="absolute top-8 left-0 right-0 hidden md:block h-0.5 bg-[#2D5A46]/10 -z-10"></div>
-        <div class="text-center">
-          <div class="w-16 h-16 mx-auto rounded-full bg-[#2D5A46] text-white flex items-center justify-center text-2xl font-bold mb-6 shadow-lg shadow-[#2D5A46]/20">1</div>
-          <h3 class="text-xl font-bold text-[#2D5A46] mb-3">Cadastre suas contas</h3>
-          <p class="text-slate-600 leading-relaxed">Informe valor, vencimento e forma de pagamento. Leva menos de 2 minutos.</p>
-        </div>
-        <div class="text-center">
-          <div class="w-16 h-16 mx-auto rounded-full bg-[#2D5A46] text-white flex items-center justify-center text-2xl font-bold mb-6 shadow-lg shadow-[#2D5A46]/20">2</div>
-          <h3 class="text-xl font-bold text-[#2D5A46] mb-3">Receba alertas</h3>
-          <p class="text-slate-600 leading-relaxed">Escolha quantos dias antes quer ser avisado e nunca mais perca um prazo.</p>
-        </div>
-        <div class="text-center">
-          <div class="w-16 h-16 mx-auto rounded-full bg-[#2D5A46] text-white flex items-center justify-center text-2xl font-bold mb-6 shadow-lg shadow-[#2D5A46]/20">3</div>
-          <h3 class="text-xl font-bold text-[#2D5A46] mb-3">Pague com tranquilidade</h3>
-          <p class="text-slate-600 leading-relaxed">Acompanhe tudo em um só lugar, com clareza e sem estresse.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Oferta -->
-  <section class="py-20 px-6">
-    <div class="max-w-4xl mx-auto">
-      <div class="bg-[#2D5A46] rounded-3xl p-10 lg:p-14 text-center text-white shadow-2xl shadow-[#2D5A46]/30">
-        <span class="inline-block px-4 py-1.5 rounded-full bg-white/20 text-white text-sm font-semibold mb-6">Oferta especial de lançamento</span>
-        <h2 class="text-3xl lg:text-4xl font-bold mb-4">Primeiros 100 inscritos: R$ 15/mês por 24 meses</h2>
-        <p class="text-white/90 text-lg mb-8 max-w-2xl mx-auto">Aproveite o preço exclusivo de lançamento. Depois disso, o valor volta para <span class="line-through opacity-80">R$ 20/mês</span>.</p>
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a href="#inscricao" class="px-8 py-4 rounded-xl bg-white text-[#2D5A46] font-bold text-lg hover:bg-[#F9F7F2] transition shadow-lg">
-            Garantir minha vaga
-          </a>
-        </div>
-        <p class="mt-6 text-sm text-white/70">Vagas limitadas. Preço garantido por 24 meses.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Rodapé -->
-  <footer id="inscricao" class="bg-[#2D5A46] py-20 px-6">
-    <div class="max-w-6xl mx-auto">
+  <!-- 2. Hero -->
+  <section class="relative overflow-hidden">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
       <div class="grid lg:grid-cols-2 gap-12 items-center">
-        <div class="text-white">
-          <h2 class="text-3xl lg:text-4xl font-bold mb-4">Não perca o lançamento</h2>
-          <p class="text-white/90 text-lg mb-6 max-w-lg">Cadastre seu nome e e-mail agora e seja um dos primeiros a ter acesso ao Pague com Controle.</p>
-          <ul class="space-y-3 text-white/90">
-            <li class="flex items-center gap-2"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg> Sem taxas ocultas</li>
-            <li class="flex items-center gap-2"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg> Cancele quando quiser</li>
-            <li class="flex items-center gap-2"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg> Suporte humano</li>
+        <div>
+          <span class="inline-block px-3 py-1 bg-[#2D5A46]/10 text-[#2D5A46] text-sm font-semibold rounded-full mb-6">
+            Sistema de controle financeiro pessoal
+          </span>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#2D5A46] leading-tight mb-6">
+            Pare de pagar juros e organize suas contas de verdade
+          </h1>
+          <p class="text-lg sm:text-xl text-gray-600 mb-8 leading-relaxed">
+            Receba lembretes automáticos, acompanhe seus gastos em tempo real e descubra onde seu dinheiro está indo. Simples, prático e feito para quem quer sobrar mais no final do mês.
+          </p>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-center gap-3 text-gray-700">
+              <svg class="w-5 h-5 text-[#2D5A46] flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+              Lembretes automáticos de vencimento
+            </li>
+            <li class="flex items-center gap-3 text-gray-700">
+              <svg class="w-5 h-5 text-[#2D5A46] flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+              Visão clara de contas a pagar e a receber
+            </li>
+            <li class="flex items-center gap-3 text-gray-700">
+              <svg class="w-5 h-5 text-[#2D5A46] flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+              Relatórios simples para tomar decisões
+            </li>
           </ul>
         </div>
 
-        <div class="bg-white rounded-3xl p-8 lg:p-10 shadow-2xl">
-          <h3 class="text-2xl font-bold text-[#2D5A46] mb-2">Lista de espera</h3>
-          <p class="text-slate-600 mb-6">Vagas limitadas para os primeiros 100 inscritos.</p>
-          <form id="footer-form" class="space-y-4">
+        <div class="bg-white rounded-2xl shadow-xl p-6 sm:p-8 border border-[#2D5A46]/10">
+          <h2 class="text-2xl font-bold text-[#2D5A46] mb-2">Cadastre-se gratuitamente</h2>
+          <p class="text-gray-600 mb-6">Receba novidades e garanta condições exclusivas de lançamento.</p>
+          <form id="hero-form" class="space-y-4">
             <div>
-              <label for="footer-nome" class="block text-sm font-semibold text-slate-700 mb-1">Nome</label>
-              <input id="footer-nome" name="nome" type="text" required placeholder="Seu nome completo" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#2D5A46] focus:border-[#2D5A46] bg-[#F9F7F2]" />
+              <label for="hero-name" class="block text-sm font-medium text-gray-700 mb-1">Nome completo</label>
+              <input type="text" id="hero-name" name="name" required placeholder="Seu nome" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#2D5A46] focus:border-[#2D5A46] outline-none transition-all">
             </div>
             <div>
-              <label for="footer-email" class="block text-sm font-semibold text-slate-700 mb-1">E-mail</label>
-              <input id="footer-email" name="email" type="email" required placeholder="seu@email.com" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[#2D5A46] focus:border-[#2D5A46] bg-[#F9F7F2]" />
+              <label for="hero-email" class="block text-sm font-medium text-gray-700 mb-1">E-mail</label>
+              <input type="email" id="hero-email" name="email" required placeholder="seu@email.com" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#2D5A46] focus:border-[#2D5A46] outline-none transition-all">
             </div>
-            <button type="submit" class="submit-btn w-full px-6 py-4 rounded-xl bg-[#2D5A46] text-white font-bold text-lg hover:bg-[#234B39] transition shadow-lg shadow-[#2D5A46]/20">
-              Quero ser avisado
+            <button type="submit" class="w-full py-3.5 px-6 bg-[#2D5A46] text-white font-bold rounded-lg hover:bg-[#234839] transition-colors flex items-center justify-center gap-2">
+              <span>Quero receber novidades</span>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
             </button>
+            <p id="hero-message" class="text-sm text-center hidden"></p>
           </form>
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="border-t border-white/20 mt-16 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-        <p class="text-white/80 text-sm">© 2025 Pague com Controle. Todos os direitos reservados.</p>
-        <p class="text-white/80 text-sm">Contato: ola@paguecomcontrole.com.br</p>
+  <!-- 3. O Problema -->
+  <section class="py-16 lg:py-24">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <h2 class="text-3xl sm:text-4xl font-bold text-[#2D5A46] mb-4">O problema que resolvemos</h2>
+        <p class="text-lg text-gray-600">Muita gente ganha bem, mas no final do mês não sabe para onde foi o dinheiro. A gente conhece bem essa dor.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-white rounded-xl p-8 shadow-sm border border-[#2D5A46]/10 hover:shadow-md transition-shadow">
+          <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+          </div>
+          <h3 class="text-xl font-bold text-[#2D5A46] mb-3">Contas pagas com atraso</h3>
+          <p class="text-gray-600 leading-relaxed">Esquecer o vencimento gera juros, multas e estresse. Dinheiro que poderia estar no seu bolso some em encargos desnecessários.</p>
+        </div>
+        <div class="bg-white rounded-xl p-8 shadow-sm border border-[#2D5A46]/10 hover:shadow-md transition-shadow">
+          <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+          </div>
+          <h3 class="text-xl font-bold text-[#2D5A46] mb-3">Sem controle dos gastos</h3>
+          <p class="text-gray-600 leading-relaxed">Compras parceladas, assinaturas e gastos do dia a dia se acumulam. Sem visão clara, fica impossível economizar com consistência.</p>
+        </div>
+        <div class="bg-white rounded-xl p-8 shadow-sm border border-[#2D5A46]/10 hover:shadow-md transition-shadow">
+          <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-5">
+            <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          </div>
+          <h3 class="text-xl font-bold text-[#2D5A46] mb-3">Tempo perdido com planilhas</h3>
+          <p class="text-gray-600 leading-relaxed">Planilhas complicadas e anotações espalhadas roubam tempo. Você precisa de algo simples, rápido e que funcione no celular.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. O Que Você Vai Ter -->
+  <section class="py-16 lg:py-24 bg-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <h2 class="text-3xl sm:text-4xl font-bold text-[#2D5A46] mb-4">O que você vai ter</h2>
+        <p class="text-lg text-gray-600">Tudo o que você precisa para organizar sua vida financeira em um só lugar.</p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-[#F9F7F2] rounded-xl p-6 border border-[#2D5A46]/10">
+          <div class="w-10 h-10 bg-[#2D5A46] rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+          </div>
+          <h3 class="text-lg font-bold text-[#2D5A46] mb-2">Lembretes automáticos</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">Receba notificações antes do vencimento e nunca mais pague juros por esquecimento.</p>
+        </div>
+        <div class="bg-[#F9F7F2] rounded-xl p-6 border border-[#2D5A46]/10">
+          <div class="w-10 h-10 bg-[#2D5A46] rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+          </div>
+          <h3 class="text-lg font-bold text-[#2D5A46] mb-2">Dashboards simples</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">Veja de um olhar só quanto entrou, quanto saiu e quanto ainda falta pagar no mês.</p>
+        </div>
+        <div class="bg-[#F9F7F2] rounded-xl p-6 border border-[#2D5A46]/10">
+          <div class="w-10 h-10 bg-[#2D5A46] rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+          </div>
+          <h3 class="text-lg font-bold text-[#2D5A46] mb-2">Cadastro de contas e cartões</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">Organize contas fixas, variáveis e compras no cartão de forma prática e visual.</p>
+        </div>
+        <div class="bg-[#F9F7F2] rounded-xl p-6 border border-[#2D5A46]/10">
+          <div class="w-10 h-10 bg-[#2D5A46] rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+          </div>
+          <h3 class="text-lg font-bold text-[#2D5A46] mb-2">Calendário financeiro</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">Acompanhe os vencimentos em um calendário intuitivo e programe seus pagamentos.</p>
+        </div>
+        <div class="bg-[#F9F7F2] rounded-xl p-6 border border-[#2D5A46]/10">
+          <div class="w-10 h-10 bg-[#2D5A46] rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+          </div>
+          <h3 class="text-lg font-bold text-[#2D5A46] mb-2">Relatórios mensais</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">Entenda seus hábitos de gasto e identifique onde é possível economizar todo mês.</p>
+        </div>
+        <div class="bg-[#F9F7F2] rounded-xl p-6 border border-[#2D5A46]/10">
+          <div class="w-10 h-10 bg-[#2D5A46] rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+          </div>
+          <h3 class="text-lg font-bold text-[#2D5A46] mb-2">Acesso no celular</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">Use de qualquer lugar. A interface foi pensada primeiro para funcionar bem no seu smartphone.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Como Funciona -->
+  <section class="py-16 lg:py-24">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <h2 class="text-3xl sm:text-4xl font-bold text-[#2D5A46] mb-4">Como funciona</h2>
+        <p class="text-lg text-gray-600">Três passos para sair do caos e começar a controlar seu dinheiro.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="relative flex flex-col items-center text-center">
+          <div class="w-16 h-16 bg-[#2D5A46] text-white text-2xl font-bold rounded-full flex items-center justify-center mb-6 shadow-lg">1</div>
+          <h3 class="text-xl font-bold text-[#2D5A46] mb-3">Crie sua conta</h3>
+          <p class="text-gray-600">Cadastro rápido em menos de 2 minutos. Você já começa com acesso ao painel completo.</p>
+        </div>
+        <div class="relative flex flex-col items-center text-center">
+          <div class="w-16 h-16 bg-[#2D5A46] text-white text-2xl font-bold rounded-full flex items-center justify-center mb-6 shadow-lg">2</div>
+          <h3 class="text-xl font-bold text-[#2D5A46] mb-3">Cadastre suas contas</h3>
+          <p class="text-gray-600">Adicione contas fixas, parcelas, cartões e receitas. O sistema organiza tudo automaticamente.</p>
+        </div>
+        <div class="relative flex flex-col items-center text-center">
+          <div class="w-16 h-16 bg-[#2D5A46] text-white text-2xl font-bold rounded-full flex items-center justify-center mb-6 shadow-lg">3</div>
+          <h3 class="text-xl font-bold text-[#2D5A46] mb-3">Acompanhe e economize</h3>
+          <p class="text-gray-600">Receba lembretes, acompanhe relatórios e tome decisões com mais tranquilidade financeira.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Programa Indique e Ganhe -->
+  <section class="py-16 lg:py-24 bg-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-[#2D5A46] rounded-3xl overflow-hidden shadow-2xl">
+        <div class="grid lg:grid-cols-2">
+          <div class="p-8 sm:p-12 lg:p-16 text-white">
+            <div class="inline-flex items-center gap-2 px-3 py-1 bg-white/20 rounded-full text-sm font-semibold mb-6">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+              Novo programa
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-extrabold mb-4">Indique e Ganhe</h2>
+            <p class="text-lg text-white/90 mb-6 leading-relaxed">
+              Convide amigos para o <strong>Pague com Controle</strong> e ganhe <strong class="text-yellow-300">R$ 1,00 de desconto</strong> na sua mensalidade para cada indicado ativo.
+            </p>
+            <div class="space-y-4 mb-8">
+              <div class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-yellow-300 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+                <span class="text-white/90">Válido para planos de <strong>R$ 15</strong> ou <strong>R$ 20</strong>.</span>
+              </div>
+              <div class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-yellow-300 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+                <span class="text-white/90">O desconto é mantido enquanto o indicado estiver ativo.</span>
+              </div>
+              <div class="flex items-start gap-3">
+                <svg class="w-5 h-5 text-yellow-300 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+                <span class="text-white/90">Se o indicado cancelar, o desconto referente a ele sai automaticamente.</span>
+              </div>
+            </div>
+            <div class="bg-white/10 rounded-xl p-5 border border-white/20">
+              <p class="text-sm font-semibold uppercase tracking-wide text-yellow-300 mb-2">Exemplo prático</p>
+              <p class="text-white/90 leading-relaxed">
+                Se você estiver no plano de <strong>R$ 15</strong> e indicar <strong>15 amigos ativos</strong>, seu desconto será de <strong>R$ 15,00</strong> — e sua mensalidade vai para <strong class="text-yellow-300 text-lg">R$ 0,00</strong>. Indique mais e continue zerando o valor todo mês.
+              </p>
+            </div>
+          </div>
+          <div class="bg-[#234839] flex items-center justify-center p-8 sm:p-12 lg:p-16">
+            <div class="text-center text-white">
+              <div class="text-7xl sm:text-8xl font-extrabold mb-4">R$0</div>
+              <p class="text-xl font-medium text-white/90 mb-8">mensalidade pode sair de graça</p>
+              <a href="https://wa.me/5521991221666?text=Olá,%20tenho%20uma%20dúvida%20sobre%20o%20Pague%20com%20Controle" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 bg-white text-[#2D5A46] font-bold rounded-lg hover:bg-[#F9F7F2] transition-colors">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.521-.075-.15-.672-1.62-.921-2.216-.242-.579-.487-.5-.672-.51-.173-.008-.371-.01-.57-.01-.198 0-.521.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.434-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
+                Quero saber mais
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Oferta -->
+  <section id="oferta" class="py-16 lg:py-24">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-white rounded-3xl shadow-2xl p-8 sm:p-12 border-2 border-[#2D5A46] text-center">
+        <span class="inline-block px-4 py-1.5 bg-[#2D5A46] text-white text-sm font-bold rounded-full mb-6">VAGAS LIMITADAS</span>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#2D5A46] mb-4">Primeiros 100 inscritos</h2>
+        <p class="text-xl text-gray-600 mb-6">Garanta acesso vitalício por apenas</p>
+        <div class="flex items-center justify-center gap-2 mb-6">
+          <span class="text-5xl sm:text-7xl font-extrabold text-[#2D5A46]">R$ 15</span>
+          <span class="text-xl text-gray-500 font-medium text-left leading-tight">/mês<br><span class="text-sm">no plano anual</span></span>
+        </div>
+        <p class="text-gray-600 mb-8 max-w-lg mx-auto">Aproveite o preço especial de lançamento. Após as 100 primeiras vagas, o valor volta para o preço normal.</p>
+        <a href="https://www.asaas.com/c/cl1s151715642sjm" target="_blank" class="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-4 bg-[#2D5A46] text-white text-lg font-bold rounded-xl hover:bg-[#234839] transition-colors shadow-lg">
+          Garantir minha vaga agora
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+        </a>
+
+        <div class="mt-10 bg-[#F9F7F2] rounded-xl p-6 border border-[#2D5A46]/10">
+          <div class="flex items-center justify-center gap-2 mb-3">
+            <svg class="w-6 h-6 text-[#2D5A46]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <h3 class="text-lg font-bold text-[#2D5A46]">Garantia Incondicional de 45 Dias</h3>
+          </div>
+          <p class="text-gray-600">Assine hoje, teste na prática. Se não gostar em até <strong>45 dias</strong>, devolvemos <strong>100% do seu dinheiro</strong>. Sem burocracia e sem perguntas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Rodapé -->
+  <footer class="bg-[#2D5A46] text-white py-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <div class="flex items-center gap-2 mb-6">
+            <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+              <svg class="w-5 h-5 text-[#2D5A46]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <span class="font-bold text-lg">Pague com Controle</span>
+          </div>
+          <p class="text-white/80 text-lg leading-relaxed mb-6">
+            Organize suas contas, pare de pagar juros e tenha mais tranquilidade para viver. Cadastre-se e fique por dentro de todas as novidades.
+          </p>
+          <p class="text-white/60 text-sm">
+            © <span id="year"></span> Pague com Controle. Todos os direitos reservados.
+          </p>
+        </div>
+        <div class="bg-white/10 rounded-2xl p-6 sm:p-8 border border-white/10">
+          <h3 class="text-xl font-bold mb-2">Receba novidades no seu e-mail</h3>
+          <p class="text-white/80 text-sm mb-5">Não enviamos spam. Só conteúdo relevante sobre organização financeira.</p>
+          <form id="footer-form" class="space-y-4">
+            <div>
+              <label for="footer-name" class="sr-only">Nome</label>
+              <input type="text" id="footer-name" name="name" required placeholder="Seu nome" class="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:ring-2 focus:ring-white focus:border-white outline-none transition-all">
+            </div>
+            <div>
+              <label for="footer-email" class="sr-only">E-mail</label>
+              <input type="email" id="footer-email" name="email" required placeholder="seu@email.com" class="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/50 focus:ring-2 focus:ring-white focus:border-white outline-none transition-all">
+            </div>
+            <button type="submit" class="w-full py-3.5 px-6 bg-white text-[#2D5A46] font-bold rounded-lg hover:bg-[#F9F7F2] transition-colors">
+              Quero ficar por dentro
+            </button>
+            <p id="footer-message" class="text-sm text-center hidden"></p>
+          </form>
+        </div>
       </div>
     </div>
   </footer>
 
-  <!-- Firebase + Lógica dos formulários -->
+  <!-- 9. Botão flutuante WhatsApp -->
+  <a href="https://wa.me/5521991221666?text=Olá,%20tenho%20uma%20dúvida%20sobre%20o%20Pague%20com%20Controle" target="_blank" class="fixed bottom-6 right-6 z-50 w-14 h-14 bg-green-500 rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform" aria-label="Fale conosco no WhatsApp">
+    <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.521-.075-.15-.672-1.62-.921-2.216-.242-.579-.487-.5-.672-.51-.173-.008-.371-.01-.57-.01-.198 0-.521.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.434-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
+  </a>
+
+  <!-- Firebase + scripts -->
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyB7JQAelkgWif5AttFqtiCJAfgxxsDuYZQ",
@@ -266,44 +345,54 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    const handleForm = async (form) => {
-      const btn = form.querySelector('button[type="submit"]');
-      const originalText = btn.textContent;
-      const nome = form.nome.value.trim();
-      const email = form.email.value.trim();
-
-      if (!nome || !email) {
-        alert('Por favor, preencha seu nome e e-mail.');
-        return;
-      }
-
-      try {
-        btn.disabled = true;
-        btn.textContent = 'Enviando...';
-
-        await addDoc(collection(db, 'lista_espera'), {
-          nome,
-          email,
-          createdAt: serverTimestamp()
-        });
-
-        btn.textContent = '✓ Inscrição confirmada!';
-        form.reset();
-      } catch (error) {
-        console.error('Erro ao salvar inscrição:', error);
-        alert('Ocorreu um erro ao enviar. Tente novamente.');
-        btn.textContent = originalText;
-        btn.disabled = false;
-      }
-    };
-
-    document.querySelectorAll('form').forEach((form) => {
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        handleForm(form);
+    async function saveLead(name, email, source) {
+      const leadsRef = collection(db, "leads");
+      return await addDoc(leadsRef, {
+        name: name.trim(),
+        email: email.trim().toLowerCase(),
+        source: source,
+        createdAt: serverTimestamp()
       });
-    });
-  </script>
+    }
 
+    function setupForm(formId, messageId, source) {
+      const form = document.getElementById(formId);
+      const message = document.getElementById(messageId);
+      if (!form) return;
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const formData = new FormData(form);
+        const name = formData.get("name");
+        const email = formData.get("email");
+        const button = form.querySelector("button[type='submit']");
+        const originalText = button.innerHTML;
+
+        button.disabled = true;
+        button.innerHTML = "Enviando...";
+        message.classList.add("hidden");
+
+        try {
+          await saveLead(name, email, source);
+          message.textContent = "Cadastro realizado com sucesso! Em breve entraremos em contato.";
+          message.className = "text-sm text-center text-green-600 font-medium mt-3";
+          form.reset();
+        } catch (error) {
+          console.error("Erro ao salvar lead:", error);
+          message.textContent = "Ocorreu um erro. Tente novamente mais tarde.";
+          message.className = "text-sm text-center text-red-600 font-medium mt-3";
+        } finally {
+          button.disabled = false;
+          button.innerHTML = originalText;
+          message.classList.remove("hidden");
+        }
+      });
+    }
+
+    setupForm("hero-form", "hero-message", "hero");
+    setupForm("footer-form", "footer-message", "footer");
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
