@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pague com Controle - Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body class="bg-[#F9F7F2] min-h-screen flex items-center justify-center px-4">
+
+  <div class="w-full max-w-md bg-white rounded-2xl shadow-xl p-8">
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-[#2D5A46] text-white mb-4 text-2xl font-bold shadow-md">
+        PC
+      </div>
+      <h1 class="text-2xl font-bold text-[#2D5A46]">Pague com Controle</h1>
+      <p class="text-gray-600 mt-2" id="subtitle">Entre na sua conta para continuar</p>
+    </div>
+
+    <form id="auth-form" class="space-y-5">
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">E-mail</label>
+        <input type="email" id="email" name="email" required
+          class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#2D5A46] focus:border-[#2D5A46] outline-none transition"
+          placeholder="seu@email.com">
+      </div>
+      
+      <div>
+        <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Senha</label>
+        <input type="password" id="password" name="password" required minlength="6"
+          class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#2D5A46] focus:border-[#2D5A46] outline-none transition"
+          placeholder="••••••••">
+      </div>
+
+      <button type="submit" id="submit-btn"
+        class="w-full bg-[#2D5A46] hover:bg-[#224936] text-white font-semibold py-3 rounded-lg transition duration-200 shadow">
+        Entrar
+      </button>
+    </form>
+
+    <div id="error-message" class="hidden mt-4 p-3 bg-red-50 border border-red-200 text-red-700 rounded-lg text-sm"></div>
+
+    <div class="mt-6 text-center">
+      <p class="text-sm text-gray-600">
+        <span id="toggle-text">Não tem conta?</span>
+        <button type="button" id="toggle-btn" class="text-[#2D5A46] font-semibold hover:underline ml-1 focus:outline-none">
+          Cadastre-se
+        </button>
+      </p>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyB7JQAelkgWif5AttFqtiCJAfgxxsDuYZQ",
+      authDomain: "pague-com-controle.firebaseapp.com",
+      projectId: "pague-com-controle",
+      storageBucket: "pague-com-controle.firebasestorage.app",
+      messagingSenderId: "829210830790",
+      appId: "1:829210830790:web:b7a4822b4886471d4cb4c7",
+      measurementId: "G-VWZ26YG2RY"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const form = document.getElementById('auth-form');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const submitBtn = document.getElementById('submit-btn');
+    const toggleBtn = document.getElementById('toggle-btn');
+    const toggleText = document.getElementById('toggle-text');
+    const subtitle = document.getElementById('subtitle');
+    const errorMessage = document.getElementById('error-message');
+
+    let isLoginMode = true;
+
+    function showError(message) {
+      errorMessage.textContent = message;
+      errorMessage.classList.remove('hidden');
+    }
+
+    function hideError() {
+      errorMessage.textContent = '';
+      errorMessage.classList.add('hidden');
+    }
+
+    function toggleMode() {
+      isLoginMode = !isLoginMode;
+      hideError();
+
+      if (isLoginMode) {
+        submitBtn.textContent = 'Entrar';
+        subtitle.textContent = 'Entre na sua conta para continuar';
+        toggleText.textContent = 'Não tem conta?';
+        toggleBtn.textContent = 'Cadastre-se';
+      } else {
+        submitBtn.textContent = 'Criar Conta';
+        subtitle.textContent = 'Crie sua conta para começar';
+        toggleText.textContent = 'Já tem conta?';
+        toggleBtn.textContent = 'Faça login';
+      }
+    }
+
+    function getErrorMessage(error) {
+      switch (error.code) {
+        case 'auth/invalid-email':
+          return 'E-mail inválido. Verifique e tente novamente.';
+        case 'auth/user-disabled':
+          return 'Esta conta foi desativada.';
+        case 'auth/user-not-found':
+          return 'Usuário não encontrado. Verifique seu e-mail.';
+        case 'auth/wrong-password':
+          return 'Senha incorreta. Tente novamente.';
+        case 'auth/email-already-in-use':
+          return 'Este e-mail já está cadastrado. Tente fazer login.';
+        case 'auth/weak-password':
+          return 'A senha deve ter pelo menos 6 caracteres.';
+        case 'auth/invalid-credential':
+          return 'E-mail ou senha incorretos.';
+        case 'auth/network-request-failed':
+          return 'Erro de conexão. Verifique sua internet.';
+        case 'auth/missing-email':
+          return 'Informe um e-mail válido.';
+        case 'auth/missing-password':
+          return 'Informe sua senha.';
+        case 'auth/too-many-requests':
+          return 'Muitas tentativas. Aguarde um momento e tente novamente.';
+        default:
+          return 'Ocorreu um erro. Tente novamente.';
+      }
+    }
+
+    toggleBtn.addEventListener('click', toggleMode);
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hideError();
+
+      const email = emailInput.value.trim();
+      const password = passwordInput.value;
+
+      try {
+        if (isLoginMode) {
+          await signInWithEmailAndPassword(auth, email, password);
+        } else {
+          await createUserWithEmailAndPassword(auth, email, password);
+        }
+        window.location.href = 'dashboard.html';
+      } catch (error) {
+        showError(getErrorMessage(error));
+      }
+    });
+  </script>
+
+</body>
+</html>
