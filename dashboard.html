@@ -3,260 +3,178 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Painel do Cliente - Pague com Controle</title>
+  <title>Pague com Controle - Dashboard</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    .bg-brand { background-color: #2D5A46; }
-    .text-brand { color: #2D5A46; }
-    .bg-creme { background-color: #F5F1E8; }
+    body { font-family: 'Inter', sans-serif; }
   </style>
 </head>
-<body class="bg-gray-50 text-gray-800 antialiased">
-  <div class="flex h-screen overflow-hidden">
-    <!-- Sidebar desktop -->
-    <aside class="hidden lg:flex flex-col w-64 bg-brand text-white">
-      <div class="flex-1">
-        <div class="flex items-center gap-3 px-6 py-6">
-          <div class="w-10 h-10 rounded-lg bg-creme flex items-center justify-center text-brand">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-4 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-            </svg>
-          </div>
-          <span class="font-bold text-lg">Pague com Controle</span>
-        </div>
-        <nav class="px-4 space-y-2">
-          <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-white/10 hover:bg-white/20 transition">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-            </svg>
-            Visão Geral
-          </a>
-          <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-white/10 transition">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-            </svg>
-            Minhas Contas
-          </a>
-          <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-white/10 transition">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
-            Calendário
-          </a>
-          <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-white/10 transition">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-            Configurações
-          </a>
-        </nav>
+<body class="bg-gray-50">
+
+  <!-- Sidebar -->
+  <aside class="fixed top-0 left-0 h-full w-64 bg-emerald-600 text-white shadow-lg z-40">
+    <div class="p-6">
+      <h1 class="text-2xl font-bold">Pague com Controle</h1>
+      <p class="text-emerald-100 text-sm mt-1">Gerencie suas contas</p>
+    </div>
+    <nav class="mt-6">
+      <a href="dashboard.html" class="flex items-center px-6 py-3 bg-emerald-700 border-l-4 border-white transition">
+        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+        Dashboard
+      </a>
+      <a href="#" class="flex items-center px-6 py-3 hover:bg-emerald-500 transition">
+        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+        Relatórios
+      </a>
+      <a href="#" class="flex items-center px-6 py-3 hover:bg-emerald-500 transition">
+        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+        Configurações
+      </a>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="ml-64 p-8">
+    <!-- Header -->
+    <header class="flex justify-between items-center mb-8">
+      <div>
+        <h2 class="text-2xl font-bold text-gray-800">Dashboard</h2>
+        <p class="text-gray-500">Visão geral das suas contas</p>
       </div>
-      <div class="p-4">
-        <button id="btnLogout" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-red-100 hover:bg-white/10 transition">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-          </svg>
+      <div class="flex items-center space-x-4">
+        <div class="text-right">
+          <p id="userEmail" class="text-sm font-medium text-gray-700">Carregando...</p>
+          <p class="text-xs text-gray-500">Usuário logado</p>
+        </div>
+        <button id="logoutBtn" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg shadow transition">
           Sair
         </button>
       </div>
-    </aside>
+    </header>
 
-    <!-- Main content -->
-    <div class="flex-1 flex flex-col min-w-0">
-      <!-- Topbar -->
-      <header class="bg-white border-b border-gray-200 px-6 py-4 flex justify-between items-center">
-        <div class="flex items-center">
-          <button id="menuToggle" class="lg:hidden p-2 rounded-md text-gray-600 hover:bg-gray-100 mr-3">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
+    <!-- Cards de Resumo -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+        <div class="flex items-center justify-between">
           <div>
-            <h1 class="text-xl lg:text-2xl font-bold text-gray-800">Olá, Usuário</h1>
-            <p class="text-sm text-gray-500">Aqui está o resumo das suas contas</p>
+            <p class="text-sm text-gray-500 font-medium">Total a Pagar</p>
+            <p id="totalPagar" class="text-2xl font-bold text-red-500 mt-1">R$ 0,00</p>
+          </div>
+          <div class="p-3 bg-red-100 rounded-lg">
+            <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
           </div>
         </div>
-        <button id="btnNovaConta" class="bg-brand hover:bg-[#244b3a] text-white px-4 lg:px-5 py-2.5 rounded-lg shadow transition flex items-center gap-2">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-          </svg>
-          <span class="hidden sm:inline">+ Nova Conta</span>
-          <span class="sm:hidden">Nova</span>
+      </div>
+
+      <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-sm text-gray-500 font-medium">Contas Pagas</p>
+            <p id="totalPago" class="text-2xl font-bold text-emerald-600 mt-1">R$ 0,00</p>
+          </div>
+          <div class="p-3 bg-emerald-100 rounded-lg">
+            <svg class="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-sm text-gray-500 font-medium">Próximo Vencimento</p>
+            <p id="proximoVencimento" class="text-2xl font-bold text-blue-600 mt-1">--</p>
+          </div>
+          <div class="p-3 bg-blue-100 rounded-lg">
+            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Botão Nova Conta -->
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-lg font-bold text-gray-800">Minhas Contas</h3>
+      <button id="openModalBtn" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg shadow transition flex items-center">
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+        Nova Conta
+      </button>
+    </div>
+
+    <!-- Tabela -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="text-left px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Descrição</th>
+              <th class="text-left px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Categoria</th>
+              <th class="text-left px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Vencimento</th>
+              <th class="text-left px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Valor</th>
+              <th class="text-left px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Status</th>
+              <th class="text-left px-6 py-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">Ações</th>
+            </tr>
+          </thead>
+          <tbody id="contasTableBody" class="divide-y divide-gray-100">
+            <!-- Linhas renderizadas via JS -->
+          </tbody>
+        </table>
+      </div>
+      <div id="emptyState" class="hidden p-8 text-center text-gray-500">
+        <p>Nenhuma conta cadastrada. Clique em "Nova Conta" para adicionar.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal Nova Conta -->
+  <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+    <div class="bg-white rounded-xl shadow-xl w-full max-w-md mx-4">
+      <div class="flex justify-between items-center p-6 border-b border-gray-100">
+        <h3 class="text-lg font-bold text-gray-800">Nova Conta</h3>
+        <button id="closeModalBtn" class="text-gray-400 hover:text-gray-600 transition">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
         </button>
-      </header>
-
-      <main class="flex-1 overflow-y-auto p-6 lg:p-8">
-        <!-- Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 border-t-4 border-t-[#2D5A46]">
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-sm text-gray-500">Total a Pagar no mês</span>
-              <div class="p-2 bg-creme rounded-lg text-brand">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-            </div>
-            <div class="text-2xl font-bold text-brand">R$ 1.250,00</div>
-            <div class="text-xs text-gray-400 mt-2">Vencimentos pendentes</div>
-          </div>
-
-          <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 border-t-4 border-t-[#2D5A46]">
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-sm text-gray-500">Contas Pagas</span>
-              <div class="p-2 bg-creme rounded-lg text-brand">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-            </div>
-            <div class="text-2xl font-bold text-brand">R$ 800,00</div>
-            <div class="text-xs text-gray-400 mt-2">Mês atual</div>
-          </div>
-
-          <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 border-t-4 border-t-[#2D5A46]">
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-sm text-gray-500">Próximo Vencimento</span>
-              <div class="p-2 bg-creme rounded-lg text-brand">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-            </div>
-            <div class="text-xl font-bold text-gray-800">Conta de Luz</div>
-            <div class="text-sm text-brand font-medium">15/07</div>
-          </div>
-        </div>
-
-        <!-- Table -->
-        <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-          <div class="px-6 py-4 border-b border-gray-100">
-            <h2 class="text-lg font-bold text-gray-800">Minhas Contas</h2>
-          </div>
-          <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse">
-              <thead>
-                <tr class="bg-gray-50 text-gray-500 text-xs uppercase tracking-wider">
-                  <th class="px-6 py-3 font-semibold">Descrição</th>
-                  <th class="px-6 py-3 font-semibold">Vencimento</th>
-                  <th class="px-6 py-3 font-semibold">Valor</th>
-                  <th class="px-6 py-3 font-semibold">Status</th>
-                  <th class="px-6 py-3 font-semibold">Categoria</th>
-                  <th class="px-6 py-3 font-semibold">Ações</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-gray-100 text-sm">
-                <tr>
-                  <td class="px-6 py-4 font-medium text-gray-800">Conta de Luz</td>
-                  <td class="px-6 py-4 text-gray-600">15/07/2025</td>
-                  <td class="px-6 py-4 text-gray-600">R$ 250,00</td>
-                  <td class="px-6 py-4"><span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-700">Pendente</span></td>
-                  <td class="px-6 py-4 text-gray-600">Moradia</td>
-                  <td class="px-6 py-4"><button class="text-brand hover:underline font-medium">Editar</button></td>
-                </tr>
-                <tr>
-                  <td class="px-6 py-4 font-medium text-gray-800">Internet</td>
-                  <td class="px-6 py-4 text-gray-600">10/07/2025</td>
-                  <td class="px-6 py-4 text-gray-600">R$ 120,00</td>
-                  <td class="px-6 py-4"><span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">Pago</span></td>
-                  <td class="px-6 py-4 text-gray-600">Serviços</td>
-                  <td class="px-6 py-4"><button class="text-brand hover:underline font-medium">Editar</button></td>
-                </tr>
-                <tr>
-                  <td class="px-6 py-4 font-medium text-gray-800">Cartão de Crédito</td>
-                  <td class="px-6 py-4 text-gray-600">20/07/2025</td>
-                  <td class="px-6 py-4 text-gray-600">R$ 880,00</td>
-                  <td class="px-6 py-4"><span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-700">Pendente</span></td>
-                  <td class="px-6 py-4 text-gray-600">Outros</td>
-                  <td class="px-6 py-4"><button class="text-brand hover:underline font-medium">Editar</button></td>
-                </tr>
-                <tr>
-                  <td class="px-6 py-4 font-medium text-gray-800">Academia</td>
-                  <td class="px-6 py-4 text-gray-600">05/07/2025</td>
-                  <td class="px-6 py-4 text-gray-600">R$ 80,00</td>
-                  <td class="px-6 py-4"><span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">Pago</span></td>
-                  <td class="px-6 py-4 text-gray-600">Saúde</td>
-                  <td class="px-6 py-4"><button class="text-brand hover:underline font-medium">Editar</button></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </main>
-    </div>
-  </div>
-
-  <!-- Mobile sidebar -->
-  <aside id="mobileSidebar" class="fixed inset-y-0 left-0 w-64 bg-brand text-white transform -translate-x-full transition-transform duration-200 lg:hidden z-40 shadow-xl">
-    <div class="flex items-center justify-between p-6">
-      <span class="font-bold text-lg">Pague com Controle</span>
-      <button id="closeMobileSidebar" class="text-white hover:text-gray-200">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </button>
-    </div>
-    <nav class="px-4 space-y-2">
-      <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-white/10">Visão Geral</a>
-      <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-white/10">Minhas Contas</a>
-      <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-white/10">Calendário</a>
-      <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-white/10">Configurações</a>
-    </nav>
-    <div class="absolute bottom-0 w-full p-4">
-      <button id="btnLogoutMobile" class="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-red-100 hover:bg-white/10">
-        Sair
-      </button>
-    </div>
-  </aside>
-  <div id="mobileBackdrop" class="fixed inset-0 bg-black/50 z-30 hidden lg:hidden"></div>
-
-  <!-- Modal -->
-  <div id="modalNovaConta" class="fixed inset-0 z-50 hidden bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="bg-white rounded-xl shadow-2xl w-full max-w-md p-6 relative">
-      <button id="btnFecharModal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </button>
-      <h2 class="text-lg font-bold text-gray-800 mb-1">Nova Conta</h2>
-      <p class="text-sm text-gray-500 mb-4">Preencha os dados da conta a ser controlada.</p>
-      <form id="formNovaConta" class="space-y-4">
+      </div>
+      <form id="contaForm" class="p-6 space-y-4">
         <div>
-          <label for="descricao" class="block text-sm font-medium text-gray-700">Descrição</label>
-          <input type="text" id="descricao" name="descricao" required placeholder="Ex: Conta de luz" class="w-full mt-1 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#2D5A46] focus:border-[#2D5A46]">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Descrição</label>
+          <input type="text" id="descricao" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition" placeholder="Ex: Conta de luz">
         </div>
         <div>
-          <label for="valor" class="block text-sm font-medium text-gray-700">Valor</label>
-          <input type="number" id="valor" name="valor" step="0.01" min="0" required placeholder="0,00" class="w-full mt-1 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#2D5A46] focus:border-[#2D5A46]">
-        </div>
-        <div>
-          <label for="vencimento" class="block text-sm font-medium text-gray-700">Vencimento</label>
-          <input type="date" id="vencimento" name="vencimento" required class="w-full mt-1 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#2D5A46] focus:border-[#2D5A46]">
-        </div>
-        <div>
-          <label for="categoria" class="block text-sm font-medium text-gray-700">Categoria</label>
-          <select id="categoria" name="categoria" class="w-full mt-1 border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[#2D5A46] focus:border-[#2D5A46]">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Categoria</label>
+          <select id="categoria" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition">
+            <option value="">Selecione</option>
             <option value="Moradia">Moradia</option>
-            <option value="Transporte">Transporte</option>
             <option value="Alimentação">Alimentação</option>
-            <option value="Serviços">Serviços</option>
+            <option value="Transporte">Transporte</option>
             <option value="Saúde">Saúde</option>
+            <option value="Lazer">Lazer</option>
             <option value="Outros">Outros</option>
           </select>
         </div>
-        <button type="submit" class="w-full bg-brand hover:bg-[#244b3a] text-white font-medium py-2.5 rounded-lg transition shadow">Salvar Conta</button>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Data de Vencimento</label>
+          <input type="date" id="vencimento" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Valor (R$)</label>
+          <input type="number" id="valor" step="0.01" min="0.01" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition" placeholder="0,00">
+        </div>
+        <div class="flex justify-end space-x-3 pt-4">
+          <button type="button" id="cancelBtn" class="px-4 py-2 text-gray-600 hover:text-gray-800 transition">Cancelar</button>
+          <button type="submit" id="saveBtn" class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded-lg shadow transition">Salvar</button>
+        </div>
       </form>
     </div>
   </div>
 
-  <!-- Firebase SDK -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <!-- Firebase Compat via CDN -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 
   <script>
-    // Configuração do Firebase (pronta para integração)
+    // Configuração do Firebase
     const firebaseConfig = {
       apiKey: "AIzaSyB7JQAelkgWif5AttFqtiCJAfgxxsDuYZQ",
       authDomain: "pague-com-controle.firebaseapp.com",
@@ -267,121 +185,232 @@
       measurementId: "G-VWZ26YG2RY"
     };
 
-    // Inicializa Firebase
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
     const db = firebase.firestore();
 
-    // Observa o estado de autenticação
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        console.log('Usuário autenticado:', user.uid);
-        // Próxima fase: carregar contas do usuário
-        // loadAccounts(user.uid);
-      } else {
-        console.log('Nenhum usuário autenticado. Implementar tela de login.');
-      }
+    let currentUser = null;
+    let unsubscribeContas = null;
+
+    // Elementos do DOM
+    const userEmailEl = document.getElementById('userEmail');
+    const logoutBtn = document.getElementById('logoutBtn');
+    const totalPagarEl = document.getElementById('totalPagar');
+    const totalPagoEl = document.getElementById('totalPago');
+    const proximoVencimentoEl = document.getElementById('proximoVencimento');
+    const contasTableBody = document.getElementById('contasTableBody');
+    const emptyState = document.getElementById('emptyState');
+    const modal = document.getElementById('modal');
+    const openModalBtn = document.getElementById('openModalBtn');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const cancelBtn = document.getElementById('cancelBtn');
+    const contaForm = document.getElementById('contaForm');
+    const saveBtn = document.getElementById('saveBtn');
+
+    // Formatação de moeda pt-BR
+    function formatarMoeda(valor) {
+      return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valor || 0);
+    }
+
+    // Formatação de data pt-BR
+    function formatarData(dataString) {
+      if (!dataString) return '--';
+      const data = new Date(dataString + 'T00:00:00');
+      return data.toLocaleDateString('pt-BR');
+    }
+
+    // Abrir/fechar modal
+    function openModal() {
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeModal() {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      contaForm.reset();
+    }
+
+    openModalBtn.addEventListener('click', openModal);
+    closeModalBtn.addEventListener('click', closeModal);
+    cancelBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) closeModal();
     });
 
-    // Funções para integração futura
-    function loadAccounts(uid) {
-      db.collection('users')
-        .doc(uid)
-        .collection('contas')
-        .orderBy('vencimento')
-        .onSnapshot((snapshot) => {
-          console.log('Contas carregadas:', snapshot.size);
-          // Próxima fase: renderizar a tabela com os dados
-        }, (error) => {
-          console.error('Erro ao carregar contas:', error);
-        });
-    }
-
-    function addAccount(data) {
-      const user = auth.currentUser;
-      if (!user) {
-        console.warn('Usuário não autenticado. Salvar localmente até o login.');
-        return Promise.resolve();
-      }
-      return db.collection('users')
-        .doc(user.uid)
-        .collection('contas')
-        .add({
-          ...data,
-          status: 'Pendente',
-          createdAt: firebase.firestore.FieldValue.serverTimestamp()
-        });
-    }
-
-    function logout() {
-      auth.signOut().catch((error) => {
+    // Logout
+    logoutBtn.addEventListener('click', function() {
+      auth.signOut().then(() => {
+        window.location.href = 'login.html';
+      }).catch((error) => {
         console.error('Erro ao sair:', error);
+        alert('Erro ao fazer logout. Tente novamente.');
       });
-    }
-  </script>
-
-  <script>
-    // Interações da interface
-    const menuToggle = document.getElementById('menuToggle');
-    const mobileSidebar = document.getElementById('mobileSidebar');
-    const closeMobileSidebar = document.getElementById('closeMobileSidebar');
-    const mobileBackdrop = document.getElementById('mobileBackdrop');
-    const btnNovaConta = document.getElementById('btnNovaConta');
-    const modalNovaConta = document.getElementById('modalNovaConta');
-    const btnFecharModal = document.getElementById('btnFecharModal');
-    const formNovaConta = document.getElementById('formNovaConta');
-
-    function openMobileSidebar() {
-      mobileSidebar.classList.remove('-translate-x-full');
-      mobileBackdrop.classList.remove('hidden');
-    }
-
-    function closeMobileSidebarFn() {
-      mobileSidebar.classList.add('-translate-x-full');
-      mobileBackdrop.classList.add('hidden');
-    }
-
-    menuToggle.addEventListener('click', openMobileSidebar);
-    closeMobileSidebar.addEventListener('click', closeMobileSidebarFn);
-    mobileBackdrop.addEventListener('click', closeMobileSidebarFn);
-
-    btnNovaConta.addEventListener('click', () => {
-      modalNovaConta.classList.remove('hidden');
     });
 
-    btnFecharModal.addEventListener('click', () => {
-      modalNovaConta.classList.add('hidden');
+    // Renderizar tabela e calcular resumos
+    function renderizarContas(contas) {
+      contasTableBody.innerHTML = '';
+
+      if (contas.length === 0) {
+        emptyState.classList.remove('hidden');
+        totalPagarEl.textContent = formatarMoeda(0);
+        totalPagoEl.textContent = formatarMoeda(0);
+        proximoVencimentoEl.textContent = '--';
+        return;
+      }
+
+      emptyState.classList.add('hidden');
+
+      let totalPagar = 0;
+      let totalPago = 0;
+      let proximaData = null;
+      const hoje = new Date();
+      hoje.setHours(0, 0, 0, 0);
+
+      contas.forEach((conta) => {
+        const data = conta.data;
+        const docId = conta.id;
+
+        // Cálculos
+        if (data.status === 'Pendente') {
+          totalPagar += parseFloat(data.valor) || 0;
+        } else if (data.status === 'Pago') {
+          totalPago += parseFloat(data.valor) || 0;
+        }
+
+        if (data.vencimento && data.status === 'Pendente') {
+          const dataVenc = new Date(data.vencimento + 'T00:00:00');
+          if (!proximaData || dataVenc < proximaData) {
+            proximaData = dataVenc;
+          }
+        }
+
+        // Status badge
+        const statusClass = data.status === 'Pago'
+          ? 'bg-emerald-100 text-emerald-700'
+          : 'bg-yellow-100 text-yellow-700';
+
+        // Ações
+        const acoesHtml = data.status === 'Pendente'
+          ? `<button onclick="pagarConta('${docId}')" class="text-emerald-600 hover:text-emerald-800 font-medium mr-3 transition">Pagar</button>
+             <button onclick="excluirConta('${docId}')" class="text-red-500 hover:text-red-700 font-medium transition">Excluir</button>`
+          : `<button onclick="excluirConta('${docId}')" class="text-red-500 hover:text-red-700 font-medium transition">Excluir</button>`;
+
+        const row = document.createElement('tr');
+        row.className = 'hover:bg-gray-50 transition';
+        row.innerHTML = `
+          <td class="px-6 py-4 text-sm font-medium text-gray-800">${data.descricao || '-'}</td>
+          <td class="px-6 py-4 text-sm text-gray-600">${data.categoria || '-'}</td>
+          <td class="px-6 py-4 text-sm text-gray-600">${formatarData(data.vencimento)}</td>
+          <td class="px-6 py-4 text-sm font-medium text-gray-800">${formatarMoeda(data.valor)}</td>
+          <td class="px-6 py-4">
+            <span class="px-2 py-1 text-xs font-semibold rounded-full ${statusClass}">${data.status}</span>
+          </td>
+          <td class="px-6 py-4 text-sm">${acoesHtml}</td>
+        `;
+        contasTableBody.appendChild(row);
+      });
+
+      totalPagarEl.textContent = formatarMoeda(totalPagar);
+      totalPagoEl.textContent = formatarMoeda(totalPago);
+      proximoVencimentoEl.textContent = proximaData ? proximaData.toLocaleDateString('pt-BR') : '--';
+    }
+
+    // Pagar conta
+    window.pagarConta = function(docId) {
+      if (!currentUser) return;
+      db.collection('users').doc(currentUser.uid).collection('contas').doc(docId).update({
+        status: 'Pago'
+      }).catch((error) => {
+        console.error('Erro ao pagar conta:', error);
+        alert('Erro ao atualizar status. Tente novamente.');
+      });
+    };
+
+    // Excluir conta
+    window.excluirConta = function(docId) {
+      if (!currentUser) return;
+      if (!confirm('Tem certeza que deseja excluir esta conta?')) return;
+      db.collection('users').doc(currentUser.uid).collection('contas').doc(docId).delete().catch((error) => {
+        console.error('Erro ao excluir conta:', error);
+        alert('Erro ao excluir conta. Tente novamente.');
+      });
+    };
+
+    // Adicionar nova conta
+    contaForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      if (!currentUser) return;
+
+      const descricao = document.getElementById('descricao').value.trim();
+      const categoria = document.getElementById('categoria').value;
+      const vencimento = document.getElementById('vencimento').value;
+      const valor = parseFloat(document.getElementById('valor').value);
+
+      if (!descricao || !categoria || !vencimento || isNaN(valor) || valor <= 0) {
+        alert('Preencha todos os campos corretamente.');
+        return;
+      }
+
+      saveBtn.disabled = true;
+      saveBtn.textContent = 'Salvando...';
+
+      db.collection('users').doc(currentUser.uid).collection('contas').add({
+        descricao: descricao,
+        categoria: categoria,
+        vencimento: vencimento,
+        valor: valor,
+        status: 'Pendente',
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      }).then(() => {
+        closeModal();
+      }).catch((error) => {
+        console.error('Erro ao adicionar conta:', error);
+        alert('Erro ao salvar conta. Tente novamente.');
+      }).finally(() => {
+        saveBtn.disabled = false;
+        saveBtn.textContent = 'Salvar';
+      });
     });
 
-    modalNovaConta.addEventListener('click', (e) => {
-      if (e.target === modalNovaConta) {
-        modalNovaConta.classList.add('hidden');
+    // Autenticação e listagem em tempo real
+    auth.onAuthStateChanged((user) => {
+      if (!user) {
+        // Bloqueio de segurança: redireciona para login se não houver usuário
+        window.location.href = 'login.html';
+        return;
+      }
+
+      currentUser = user;
+      userEmailEl.textContent = user.email || 'Usuário';
+
+      // Cancela listener anterior se existir
+      if (unsubscribeContas) {
+        unsubscribeContas();
+      }
+
+      // Listagem em tempo real com onSnapshot
+      unsubscribeContas = db.collection('users').doc(user.uid).collection('contas')
+        .orderBy('createdAt', 'desc')
+        .onSnapshot((snapshot) => {
+          const contas = [];
+          snapshot.forEach((doc) => {
+            contas.push({ id: doc.id, data: doc.data() });
+          });
+          renderizarContas(contas);
+        }, (error) => {
+          console.error('Erro ao escutar contas:', error);
+          alert('Erro ao carregar contas. Verifique sua conexão.');
+        });
+    });
+
+    // Limpar listener ao sair da página
+    window.addEventListener('beforeunload', () => {
+      if (unsubscribeContas) {
+        unsubscribeContas();
       }
     });
-
-    formNovaConta.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const data = {
-        descricao: document.getElementById('descricao').value,
-        valor: parseFloat(document.getElementById('valor').value),
-        vencimento: document.getElementById('vencimento').value,
-        categoria: document.getElementById('categoria').value
-      };
-      console.log('Nova conta:', data);
-      addAccount(data).finally(() => {
-        formNovaConta.reset();
-        modalNovaConta.classList.add('hidden');
-      });
-    });
-
-    document.getElementById('btnLogout').addEventListener('click', logout);
-    const btnLogoutMobile = document.getElementById('btnLogoutMobile');
-    if (btnLogoutMobile) {
-      btnLogoutMobile.addEventListener('click', () => {
-        closeMobileSidebarFn();
-        logout();
-      });
-    }
   </script>
 </body>
 </html>
