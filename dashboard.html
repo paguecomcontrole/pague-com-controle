@@ -1,498 +1,784 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pague com Controle - Dashboard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pague Com Controle - Dashboard</title>
+
+  <!-- Firebase v8 (compat) via CDN -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #f3f4f6;
+      background-color: #f1f5f9;
       display: flex;
       min-height: 100vh;
-      color: #1f2937;
     }
+
+    /* Sidebar */
     .sidebar {
       width: 260px;
-      background: #1e3a8a;
+      background: linear-gradient(180deg, #1e3a8a 0%, #172554 100%);
       color: #fff;
       display: flex;
       flex-direction: column;
-      padding: 24px 0;
+      padding: 25px 0;
       position: fixed;
       height: 100vh;
-      left: 0;
-      top: 0;
+      box-shadow: 4px 0 10px rgba(0, 0, 0, 0.15);
     }
+
     .logo-area {
       text-align: center;
-      padding: 0 24px 24px;
-      border-bottom: 1px solid rgba(255,255,255,0.15);
+      padding: 0 20px 30px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
     }
+
     .logo-area img {
-      max-width: 140px;
+      width: 130px;
       height: auto;
-      display: block;
-      margin: 0 auto;
+      margin-bottom: 10px;
     }
+
+    .logo-area h2 {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
     .menu {
-      list-style: none;
-      margin-top: 24px;
+      margin-top: 25px;
       flex: 1;
     }
-    .menu li a, .menu li button {
+
+    .menu-item {
+      padding: 16px 25px;
+      cursor: pointer;
       display: flex;
       align-items: center;
-      width: 100%;
-      padding: 14px 24px;
-      color: #e0e7ff;
-      text-decoration: none;
-      font-size: 15px;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      transition: background 0.2s, color 0.2s;
-      text-align: left;
+      gap: 12px;
+      transition: all 0.25s ease;
+      font-size: 16px;
+      border-left: 4px solid transparent;
     }
-    .menu li a:hover, .menu li button:hover {
-      background: rgba(255,255,255,0.1);
-      color: #fff;
+
+    .menu-item:hover {
+      background: rgba(255, 255, 255, 0.1);
     }
-    .menu li a.active {
-      background: rgba(255,255,255,0.15);
-      color: #fff;
+
+    .menu-item.active {
+      background: rgba(255, 255, 255, 0.15);
+      border-left-color: #60a5fa;
       font-weight: 600;
     }
+
+    .menu-icon {
+      font-size: 20px;
+    }
+
+    .user-info {
+      padding: 20px 25px;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      font-size: 13px;
+      opacity: 0.9;
+      word-break: break-word;
+    }
+
+    /* Main content */
     .main {
       margin-left: 260px;
       flex: 1;
-      padding: 32px;
+      padding: 35px;
     }
+
     .header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 24px;
+      margin-bottom: 30px;
     }
-    .header h1 { font-size: 24px; }
-    .btn {
-      padding: 12px 20px;
+
+    .header h1 {
+      color: #1e293b;
+      font-size: 28px;
+    }
+
+    .btn-nova-conta {
+      background: #2563eb;
+      color: #fff;
       border: none;
+      padding: 13px 22px;
       border-radius: 8px;
+      font-size: 16px;
       cursor: pointer;
-      font-size: 14px;
       font-weight: 600;
-      transition: opacity 0.2s, transform 0.1s;
+      box-shadow: 0 4px 6px rgba(37, 99, 235, 0.25);
+      transition: background 0.2s, transform 0.1s;
     }
-    .btn:hover { opacity: 0.9; }
-    .btn:active { transform: translateY(1px); }
-    .btn-primary { background: #2563eb; color: #fff; }
-    .btn-secondary { background: #e5e7eb; color: #374151; }
-    .btn-success { background: #10b981; color: #fff; }
-    .btn-danger { background: #ef4444; color: #fff; }
+
+    .btn-nova-conta:hover {
+      background: #1d4ed8;
+    }
+
+    .btn-nova-conta:active {
+      transform: scale(0.98);
+    }
+
+    /* Cards de resumo */
     .cards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-      margin-bottom: 24px;
+      gap: 20px;
+      margin-bottom: 30px;
     }
+
     .card {
       background: #fff;
+      padding: 22px;
       border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     }
-    .card p { font-size: 13px; color: #6b7280; margin-bottom: 6px; }
-    .card h2 { font-size: 22px; color: #111827; }
-    .card.pagar h2 { color: #dc2626; }
-    .card.pagas h2 { color: #059669; }
-    .toolbar { margin-bottom: 16px; }
-    .table-wrap {
+
+    .card-title {
+      font-size: 14px;
+      color: #64748b;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .card-value {
+      font-size: 26px;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .card-value.total-pagar {
+      color: #dc2626;
+    }
+
+    .card-value.total-pago {
+      color: #16a34a;
+    }
+
+    .card-value.saldo {
+      color: #2563eb;
+    }
+
+    /* Tabela */
+    .table-container {
       background: #fff;
       border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
       overflow: hidden;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
     }
-    table { width: 100%; border-collapse: collapse; }
-    th, td { padding: 14px 16px; text-align: left; font-size: 14px; }
-    th { background: #f9fafb; color: #4b5563; font-weight: 600; }
-    tbody tr { border-top: 1px solid #f3f4f6; }
-    tbody tr:hover { background: #f9fafb; }
-    .badge {
+
+    .table-container h3 {
+      padding: 20px 25px;
+      color: #1e293b;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 14px 20px;
+      text-align: left;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    th {
+      background: #f8fafc;
+      color: #475569;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    td {
+      color: #334155;
+      font-size: 14px;
+    }
+
+    tr:hover {
+      background: #f8fafc;
+    }
+
+    .status {
       display: inline-block;
-      padding: 4px 10px;
-      border-radius: 999px;
+      padding: 5px 12px;
+      border-radius: 20px;
       font-size: 12px;
       font-weight: 600;
     }
-    .badge-pago { background: #d1fae5; color: #065f46; }
-    .badge-pendente { background: #fee2e2; color: #991b1b; }
-    .empty { text-align: center; padding: 40px; color: #6b7280; }
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.45);
+
+    .status.pago {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .status.pendente {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .btn-delete {
+      background: transparent;
+      color: #dc2626;
+      border: 1px solid #dc2626;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: all 0.2s;
+    }
+
+    .btn-delete:hover {
+      background: #dc2626;
+      color: #fff;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 50px 20px;
+      color: #64748b;
+    }
+
+    /* Abas */
+    .aba {
       display: none;
+    }
+
+    .aba.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
       justify-content: center;
       align-items: center;
-      z-index: 1000;
+      padding: 20px;
     }
-    .modal-overlay.open { display: flex; }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
     .modal {
       background: #fff;
-      border-radius: 14px;
       width: 100%;
       max-width: 480px;
-      padding: 28px;
-      box-shadow: 0 20px 25px rgba(0,0,0,0.15);
-      animation: fadeIn 0.2s ease;
+      border-radius: 14px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
     }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-    .modal h2 { margin-bottom: 20px; font-size: 20px; }
-    .form-group { margin-bottom: 16px; }
-    .form-group label { display: block; font-size: 13px; font-weight: 600; color: #374151; margin-bottom: 6px; }
-    .form-group input, .form-group select {
-      width: 100%;
-      padding: 10px 12px;
-      border: 1px solid #d1d5db;
-      border-radius: 8px;
+
+    .modal-header {
+      background: #2563eb;
+      color: #fff;
+      padding: 18px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-header h2 {
+      font-size: 18px;
+    }
+
+    .btn-close {
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .modal-body {
+      padding: 25px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      color: #334155;
+      font-weight: 600;
       font-size: 14px;
-      outline: none;
     }
-    .form-group input:focus, .form-group select:focus { border-color: #2563eb; }
-    .form-group.checkbox { display: flex; align-items: center; gap: 10px; }
-    .form-group.checkbox input { width: auto; }
-    .form-group.checkbox label { margin: 0; }
-    .modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 8px; }
-    .loading { opacity: 0.7; pointer-events: none; }
-    .hidden { display: none; }
-    .user-info { margin-top: 24px; padding: 0 24px; font-size: 13px; color: #c7d2fe; }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 15px;
+      outline: none;
+      transition: border 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: #2563eb;
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .btn-cancelar {
+      background: #e2e8f0;
+      color: #475569;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .btn-salvar {
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .btn-salvar:hover {
+      background: #1d4ed8;
+    }
+
+    .btn-salvar:disabled {
+      background: #93c5fd;
+      cursor: not-allowed;
+    }
+
+    /* Relatórios e Configurações */
+    .placeholder-content {
+      background: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      color: #475569;
+      text-align: center;
+    }
+
+    .placeholder-content h3 {
+      color: #1e3a8a;
+      margin-bottom: 12px;
+    }
+
+    /* Responsivo */
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 100%;
+        position: relative;
+        height: auto;
+        padding: 15px 0;
+      }
+
+      .main {
+        margin-left: 0;
+      }
+
+      body {
+        flex-direction: column;
+      }
+    }
   </style>
 </head>
 <body>
 
+  <!-- Sidebar -->
   <aside class="sidebar">
     <div class="logo-area">
-      <img src="logo.png" alt="Logo Pague com Controle" />
+      <img src="logo.png" alt="Logo Pague Com Controle">
+      <h2>Pague Com Controle</h2>
     </div>
-    <ul class="menu">
-      <li><a href="#" class="active">Dashboard</a></li>
-      <li><a href="#">Relatórios</a></li>
-      <li><a href="#">Configurações</a></li>
-      <li><button id="btn-sair">Sair</button></li>
-    </ul>
-    <div class="user-info" id="user-info">Carregando...</div>
+    <nav class="menu">
+      <div class="menu-item active" data-aba="dashboard">
+        <span class="menu-icon">📊</span>
+        <span>Dashboard</span>
+      </div>
+      <div class="menu-item" data-aba="relatorios">
+        <span class="menu-icon">📈</span>
+        <span>Relatórios</span>
+      </div>
+      <div class="menu-item" data-aba="configuracoes">
+        <span class="menu-icon">⚙️</span>
+        <span>Configurações</span>
+      </div>
+    </nav>
+    <div class="user-info">
+      <span id="userEmail">Carregando...</span>
+    </div>
   </aside>
 
+  <!-- Main -->
   <main class="main">
-    <div class="header">
-      <h1>Dashboard</h1>
-      <button id="btn-nova-conta" class="btn btn-primary">+ Nova Conta</button>
-    </div>
 
-    <div class="cards">
-      <div class="card pagar">
-        <p>Total a Pagar</p>
-        <h2 id="total-pagar">R$ 0,00</h2>
+    <!-- ABA DASHBOARD -->
+    <section id="aba-dashboard" class="aba active">
+      <div class="header">
+        <h1>Dashboard</h1>
+        <button class="btn-nova-conta" onclick="abrirModal()">+ Nova Conta</button>
       </div>
-      <div class="card pagas">
-        <p>Contas Pagas</p>
-        <h2 id="total-pagas">R$ 0,00</h2>
-      </div>
-    </div>
 
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Descrição</th>
-            <th>Valor</th>
-            <th>Vencimento</th>
-            <th>Categoria</th>
-            <th>Status</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody id="tabela-contas">
-          <tr id="empty-row">
-            <td colspan="6" class="empty">Nenhuma conta cadastrada.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+      <div class="cards">
+        <div class="card">
+          <div class="card-title">Total em Contas</div>
+          <div class="card-value" id="totalContas">R$ 0,00</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Total a Pagar</div>
+          <div class="card-value total-pagar" id="totalPagar">R$ 0,00</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Total Pago</div>
+          <div class="card-value total-pago" id="totalPago">R$ 0,00</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Saldo</div>
+          <div class="card-value saldo" id="saldo">R$ 0,00</div>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <h3>Minhas Contas</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Conta</th>
+              <th>Categoria</th>
+              <th>Vencimento</th>
+              <th>Valor</th>
+              <th>Status</th>
+              <th>Ação</th>
+            </tr>
+          </thead>
+          <tbody id="tabelaContas">
+            <tr>
+              <td colspan="6" class="empty-state">Carregando contas...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ABA RELATÓRIOS -->
+    <section id="aba-relatorios" class="aba">
+      <div class="header">
+        <h1>Relatórios</h1>
+      </div>
+      <div class="placeholder-content">
+        <h3>Em breve</h3>
+        <p>Aqui você verá gráficos e relatórios detalhados das suas contas.</p>
+      </div>
+    </section>
+
+    <!-- ABA CONFIGURAÇÕES -->
+    <section id="aba-configuracoes" class="aba">
+      <div class="header">
+        <h1>Configurações</h1>
+      </div>
+      <div class="placeholder-content">
+        <h3>Configurações da Conta</h3>
+        <p>Área reservada para ajustes do seu perfil e preferências.</p>
+      </div>
+    </section>
+
   </main>
 
-  <div class="modal-overlay" id="modal-overlay">
+  <!-- Modal Nova Conta -->
+  <div class="modal-overlay" id="modalOverlay">
     <div class="modal">
-      <h2>Nova Conta</h2>
-      <form id="form-conta">
-        <div class="form-group">
-          <label for="descricao">Descrição</label>
-          <input type="text" id="descricao" required placeholder="Ex: Conta de luz" />
-        </div>
-        <div class="form-group">
-          <label for="valor">Valor</label>
-          <input type="number" id="valor" step="0.01" min="0.01" required placeholder="0,00" />
-        </div>
-        <div class="form-group">
-          <label for="vencimento">Vencimento</label>
-          <input type="date" id="vencimento" required />
-        </div>
-        <div class="form-group">
-          <label for="categoria">Categoria</label>
-          <select id="categoria" required>
-            <option value="">Selecione</option>
-            <option value="Moradia">Moradia</option>
-            <option value="Alimentação">Alimentação</option>
-            <option value="Transporte">Transporte</option>
-            <option value="Saúde">Saúde</option>
-            <option value="Educação">Educação</option>
-            <option value="Lazer">Lazer</option>
-            <option value="Outros">Outros</option>
-          </select>
-        </div>
-        <div class="form-group checkbox">
-          <input type="checkbox" id="pago" />
-          <label for="pago">Marcar como pago</label>
-        </div>
-        <div class="modal-actions">
-          <button type="button" id="btn-cancelar" class="btn btn-secondary">Cancelar</button>
-          <button type="submit" id="btn-salvar" class="btn btn-primary">Salvar</button>
-        </div>
-      </form>
+      <div class="modal-header">
+        <h2>Nova Conta</h2>
+        <button class="btn-close" onclick="fecharModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="formConta" onsubmit="salvarConta(event)">
+          <div class="form-group">
+            <label for="nome">Nome da Conta</label>
+            <input type="text" id="nome" required placeholder="Ex: Conta de luz">
+          </div>
+          <div class="form-group">
+            <label for="categoria">Categoria</label>
+            <select id="categoria" required>
+              <option value="">Selecione</option>
+              <option value="Moradia">Moradia</option>
+              <option value="Alimentação">Alimentação</option>
+              <option value="Transporte">Transporte</option>
+              <option value="Saúde">Saúde</option>
+              <option value="Lazer">Lazer</option>
+              <option value="Outros">Outros</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="vencimento">Vencimento</label>
+            <input type="date" id="vencimento" required>
+          </div>
+          <div class="form-group">
+            <label for="valor">Valor (R$)</label>
+            <input type="number" id="valor" step="0.01" min="0.01" required placeholder="0,00">
+          </div>
+          <div class="form-group">
+            <label for="status">Status</label>
+            <select id="status" required>
+              <option value="pendente">Pendente</option>
+              <option value="pago">Pago</option>
+            </select>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn-cancelar" onclick="fecharModal()">Cancelar</button>
+            <button type="submit" class="btn-salvar" id="btnSalvar">Salvar</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 
-  <script type="importmap">
-  {
-    "imports": {
-      "firebase/app": "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js",
-      "firebase/auth": "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js",
-      "firebase/firestore": "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js"
-    }
-  }
-  </script>
-
-  <script type="module">
-    import { initializeApp } from "firebase/app";
-    import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-    import {
-      getFirestore,
-      collection,
-      addDoc,
-      query,
-      where,
-      getDocs,
-      doc,
-      updateDoc
-    } from "firebase/firestore";
-
+  <script>
+    // ======================================================
+    // 1. CONFIGURAÇÃO DO FIREBASE (versão 8 compat)
+    // ======================================================
     const firebaseConfig = {
       apiKey: "AIzaSyB7JQAelkgWif5AttFqtiCJAfgxxsDuYZQ",
       authDomain: "pague-com-controle.firebaseapp.com",
       projectId: "pague-com-controle",
       storageBucket: "pague-com-controle.firebasestorage.app",
       messagingSenderId: "829210830790",
-      appId: "1:829210830790:web:b7a4822b4886471d4cb4c7",
-      measurementId: "G-VWZ26YG2RY"
+      appId: "1:829210830790:web:b7a4822b4886471d4cb4c7"
     };
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
 
-    const tabelaContas = document.getElementById("tabela-contas");
-    const totalPagarEl = document.getElementById("total-pagar");
-    const totalPagasEl = document.getElementById("total-pagas");
-    const userInfoEl = document.getElementById("user-info");
-    const modalOverlay = document.getElementById("modal-overlay");
-    const formConta = document.getElementById("form-conta");
-    const btnNovaConta = document.getElementById("btn-nova-conta");
-    const btnCancelar = document.getElementById("btn-cancelar");
-    const btnSair = document.getElementById("btn-sair");
-    const btnSalvar = document.getElementById("btn-salvar");
+    // ======================================================
+    // 2. CONTROLE DE ABAS
+    // ======================================================
+    const menuItems = document.querySelectorAll('.menu-item');
 
-    let usuarioAtual = null;
+    menuItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const aba = item.getAttribute('data-aba');
+        mostrarAba(aba);
 
-    const abrirModal = () => {
+        menuItems.forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+      });
+    });
+
+    function mostrarAba(nome) {
+      document.querySelectorAll('.aba').forEach(section => {
+        section.classList.remove('active');
+      });
+      document.getElementById('aba-' + nome).classList.add('active');
+    }
+
+    // ======================================================
+    // 3. MODAL
+    // ======================================================
+    const modalOverlay = document.getElementById('modalOverlay');
+    const formConta = document.getElementById('formConta');
+    const btnSalvar = document.getElementById('btnSalvar');
+
+    function abrirModal() {
+      modalOverlay.classList.add('open');
+      document.getElementById('nome').focus();
+    }
+
+    function fecharModal() {
+      modalOverlay.classList.remove('open');
       formConta.reset();
-      modalOverlay.classList.add("open");
-    };
+    }
 
-    const fecharModal = () => {
-      modalOverlay.classList.remove("open");
-    };
-
-    const formatarMoeda = (valor) => {
-      return new Intl.NumberFormat("pt-BR", {
-        style: "currency",
-        currency: "BRL"
-      }).format(valor || 0);
-    };
-
-    const formatarData = (dataString) => {
-      if (!dataString) return "-";
-      const data = new Date(dataString + "T00:00:00");
-      return data.toLocaleDateString("pt-BR");
-    };
-
-    const renderizarContas = (contas) => {
-      tabelaContas.innerHTML = "";
-
-      let totalPagar = 0;
-      let totalPagas = 0;
-
-      if (contas.length === 0) {
-        tabelaContas.innerHTML = `
-          <tr id="empty-row">
-            <td colspan="6" class="empty">Nenhuma conta cadastrada.</td>
-          </tr>
-        `;
-        totalPagarEl.textContent = formatarMoeda(0);
-        totalPagasEl.textContent = formatarMoeda(0);
-        return;
+    // Fecha modal ao clicar fora
+    modalOverlay.addEventListener('click', function(e) {
+      if (e.target === modalOverlay) {
+        fecharModal();
       }
+    });
 
-      contas.forEach((item) => {
-        const conta = item.data;
-        const valor = parseFloat(conta.valor) || 0;
+    // ======================================================
+    // 4. SALVAR CONTA NO FIRESTORE
+    // ======================================================
+    function salvarConta(event) {
+      event.preventDefault();
 
-        if (conta.pago) {
-          totalPagas += valor;
+      btnSalvar.disabled = true;
+      btnSalvar.textContent = 'Salvando...';
+
+      const nome = document.getElementById('nome').value.trim();
+      const categoria = document.getElementById('categoria').value;
+      const vencimento = document.getElementById('vencimento').value;
+      const valor = parseFloat(document.getElementById('valor').value);
+      const status = document.getElementById('status').value;
+      const criadoEm = new Date().toISOString();
+
+      db.collection('contas').add({
+        nome: nome,
+        categoria: categoria,
+        vencimento: vencimento,
+        valor: valor,
+        status: status,
+        criadoEm: criadoEm
+      })
+      .then(() => {
+        fecharModal();
+        alert('Conta salva com sucesso!');
+      })
+      .catch((error) => {
+        console.error('Erro ao salvar conta:', error);
+        alert('Erro ao salvar conta: ' + error.message);
+      })
+      .finally(() => {
+        btnSalvar.disabled = false;
+        btnSalvar.textContent = 'Salvar';
+      });
+    }
+
+    // ======================================================
+    // 5. LISTAR CONTAS E ATUALIZAR TOTAIS EM TEMPO REAL
+    // ======================================================
+    const tabelaContas = document.getElementById('tabelaContas');
+    const totalContasEl = document.getElementById('totalContas');
+    const totalPagarEl = document.getElementById('totalPagar');
+    const totalPagoEl = document.getElementById('totalPago');
+    const saldoEl = document.getElementById('saldo');
+
+    function formatarMoeda(valor) {
+      return 'R$ ' + valor.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function formatarData(dataString) {
+      if (!dataString) return '-';
+      const data = new Date(dataString + 'T00:00:00');
+      return data.toLocaleDateString('pt-BR');
+    }
+
+    function carregarContas() {
+      db.collection('contas').orderBy('criadoEm', 'desc').onSnapshot((snapshot) => {
+        let totalContas = 0;
+        let totalPagar = 0;
+        let totalPago = 0;
+        let html = '';
+
+        if (snapshot.empty) {
+          tabelaContas.innerHTML = '<tr><td colspan="6" class="empty-state">Nenhuma conta cadastrada.</td></tr>';
         } else {
-          totalPagar += valor;
+          snapshot.forEach((doc) => {
+            const conta = doc.data();
+            const id = doc.id;
+            const valor = parseFloat(conta.valor) || 0;
+
+            totalContas += valor;
+
+            if (conta.status === 'pago') {
+              totalPago += valor;
+            } else {
+              totalPagar += valor;
+            }
+
+            html += `
+              <tr>
+                <td>${conta.nome}</td>
+                <td>${conta.categoria}</td>
+                <td>${formatarData(conta.vencimento)}</td>
+                <td>${formatarMoeda(valor)}</td>
+                <td><span class="status ${conta.status}">${conta.status === 'pago' ? 'Pago' : 'Pendente'}</span></td>
+                <td><button class="btn-delete" onclick="excluirConta('${id}')">Excluir</button></td>
+              </tr>
+            `;
+          });
+
+          tabelaContas.innerHTML = html;
         }
 
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td>${conta.descricao || "-"}</td>
-          <td>${formatarMoeda(valor)}</td>
-          <td>${formatarData(conta.vencimento)}</td>
-          <td>${conta.categoria || "-"}</td>
-          <td>
-            <span class="badge ${conta.pago ? 'badge-pago' : 'badge-pendente'}">
-              ${conta.pago ? "Pago" : "Pendente"}
-            </span>
-          </td>
-          <td>
-            <button class="btn btn-${conta.pago ? 'secondary' : 'success'} btn-toggle" data-id="${item.id}" data-pago="${conta.pago ? 'true' : 'false'}">
-              ${conta.pago ? "Marcar pendente" : "Marcar pago"}
-            </button>
-          </td>
-        `;
-        tabelaContas.appendChild(tr);
+        const saldo = totalContas - totalPagar - totalPago;
+
+        totalContasEl.textContent = formatarMoeda(totalContas);
+        totalPagarEl.textContent = formatarMoeda(totalPagar);
+        totalPagoEl.textContent = formatarMoeda(totalPago);
+        saldoEl.textContent = formatarMoeda(saldo);
+      }, (error) => {
+        console.error('Erro ao carregar contas:', error);
+        tabelaContas.innerHTML = '<tr><td colspan="6" class="empty-state">Erro ao carregar contas. Verifique sua conexão.</td></tr>';
       });
+    }
 
-      totalPagarEl.textContent = formatarMoeda(totalPagar);
-      totalPagasEl.textContent = formatarMoeda(totalPagas);
+    // ======================================================
+    // 6. EXCLUIR CONTA
+    // ======================================================
+    function excluirConta(id) {
+      if (!confirm('Tem certeza que deseja excluir esta conta?')) return;
 
-      document.querySelectorAll(".btn-toggle").forEach((botao) => {
-        botao.addEventListener("click", async (e) => {
-          const id = e.target.dataset.id;
-          const pago = e.target.dataset.pago === "true";
-          await alternarStatus(id, !pago);
+      db.collection('contas').doc(id).delete()
+        .then(() => {
+          alert('Conta excluída com sucesso!');
+        })
+        .catch((error) => {
+          console.error('Erro ao excluir conta:', error);
+          alert('Erro ao excluir conta: ' + error.message);
         });
-      });
-    };
+    }
 
-    const carregarContas = async (userId) => {
-      try {
-        const q = query(
-          collection(db, "contas"),
-          where("userId", "==", userId),
-          orderBy("vencimento", "desc")
-        );
-        const snapshot = await getDocs(q);
-        const contas = [];
-        snapshot.forEach((docSnap) => {
-          contas.push({ id: docSnap.id, data: docSnap.data() });
-        });
-        renderizarContas(contas);
-      } catch (erro) {
-        console.error("Erro ao carregar contas:", erro);
-        alert("Erro ao carregar contas. Verifique o console.");
-      }
-    };
-
-    const salvarConta = async (dados) => {
-      try {
-        await addDoc(collection(db, "contas"), dados);
-        await carregarContas(usuarioAtual.uid);
-        fecharModal();
-      } catch (erro) {
-        console.error("Erro ao salvar conta:", erro);
-        alert("Erro ao salvar conta. Verifique o console.");
-      } finally {
-        btnSalvar.classList.remove("loading");
-        btnSalvar.textContent = "Salvar";
-      }
-    };
-
-    const alternarStatus = async (id, novoStatus) => {
-      try {
-        const ref = doc(db, "contas", id);
-        await updateDoc(ref, { pago: novoStatus });
-        await carregarContas(usuarioAtual.uid);
-      } catch (erro) {
-        console.error("Erro ao atualizar status:", erro);
-        alert("Erro ao atualizar status.");
-      }
-    };
-
-    onAuthStateChanged(auth, (user) => {
+    // ======================================================
+    // 7. USUÁRIO LOGADO
+    // ======================================================
+    auth.onAuthStateChanged((user) => {
+      const userEmailEl = document.getElementById('userEmail');
       if (user) {
-        usuarioAtual = user;
-        userInfoEl.textContent = `Olá, ${user.email}`;
-        carregarContas(user.uid);
+        userEmailEl.textContent = user.email || 'Usuário logado';
       } else {
-        usuarioAtual = null;
-        userInfoEl.textContent = "Nenhum usuário logado";
-        window.location.href = "login.html";
+        userEmailEl.textContent = 'Nenhum usuário logado';
       }
     });
 
-    btnNovaConta.addEventListener("click", abrirModal);
-    btnCancelar.addEventListener("click", fecharModal);
-    modalOverlay.addEventListener("click", (e) => {
-      if (e.target === modalOverlay) fecharModal();
-    });
-
-    formConta.addEventListener("submit", (e) => {
-      e.preventDefault();
-      if (!usuarioAtual) return;
-
-      btnSalvar.classList.add("loading");
-      btnSalvar.textContent = "Salvando...";
-
-      const descricao = document.getElementById("descricao").value.trim();
-      const valor = parseFloat(document.getElementById("valor").value);
-      const vencimento = document.getElementById("vencimento").value;
-      const categoria = document.getElementById("categoria").value;
-      const pago = document.getElementById("pago").checked;
-
-      const dados = {
-        userId: usuarioAtual.uid,
-        descricao,
-        valor,
-        vencimento,
-        categoria,
-        pago,
-        criadoEm: new Date().toISOString()
-      };
-
-      salvarConta(dados);
-    });
-
-    btnSair.addEventListener("click", async () => {
-      try {
-        await signOut(auth);
-        window.location.href = "login.html";
-      } catch (erro) {
-        console.error("Erro ao sair:", erro);
-        alert("Erro ao sair.");
-      }
-    });
+    // ======================================================
+    // 8. INICIALIZAÇÃO
+    // ======================================================
+    carregarContas();
   </script>
+
 </body>
 </html>
