@@ -1,182 +1,292 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard - Pague com Controle</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pague com Controle - Dashboard</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f3f4f6;
       display: flex;
-      height: 100vh;
-      background: #f4f6f8;
-      color: #333;
+      min-height: 100vh;
+      color: #1f2937;
     }
-
     .sidebar {
       width: 260px;
-      background: #1e293b;
+      background: #1e3a8a;
       color: #fff;
       display: flex;
       flex-direction: column;
-      padding: 20px;
+      padding: 24px 0;
+      position: fixed;
+      height: 100vh;
+      left: 0;
+      top: 0;
     }
-
-    .sidebar h2 {
-      margin-bottom: 30px;
-      font-size: 1.4rem;
+    .logo-area {
       text-align: center;
-      line-height: 1.3;
+      padding: 0 24px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
     }
-
-    .menu-item {
-      padding: 12px 15px;
-      margin-bottom: 8px;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background 0.2s;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 1rem;
+    .logo-area img {
+      max-width: 140px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
     }
-
-    .menu-item:hover,
-    .menu-item.active {
-      background: #334155;
-    }
-
-    .logout {
-      margin-top: auto;
-      padding: 12px 15px;
-      border-radius: 6px;
-      cursor: pointer;
-      background: #dc2626;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 1rem;
-      transition: background 0.2s;
-    }
-
-    .logout:hover {
-      background: #b91c1c;
-    }
-
-    .main {
+    .menu {
+      list-style: none;
+      margin-top: 24px;
       flex: 1;
-      padding: 30px;
-      overflow-y: auto;
     }
-
+    .menu li a, .menu li button {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      padding: 14px 24px;
+      color: #e0e7ff;
+      text-decoration: none;
+      font-size: 15px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      text-align: left;
+    }
+    .menu li a:hover, .menu li button:hover {
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+    }
+    .menu li a.active {
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+      font-weight: 600;
+    }
+    .main {
+      margin-left: 260px;
+      flex: 1;
+      padding: 32px;
+    }
     .header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 25px;
+      margin-bottom: 24px;
     }
-
-    .header h1 {
-      font-size: 1.8rem;
-      color: #1e293b;
+    .header h1 { font-size: 24px; }
+    .btn {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      transition: opacity 0.2s, transform 0.1s;
     }
-
-    .secao {
-      display: none;
+    .btn:hover { opacity: 0.9; }
+    .btn:active { transform: translateY(1px); }
+    .btn-primary { background: #2563eb; color: #fff; }
+    .btn-secondary { background: #e5e7eb; color: #374151; }
+    .btn-success { background: #10b981; color: #fff; }
+    .btn-danger { background: #ef4444; color: #fff; }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
     }
-
-    .secao.active {
-      display: block;
-    }
-
     .card {
       background: #fff;
+      border-radius: 12px;
       padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-      margin-bottom: 20px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
     }
-
-    .card h3 {
-      margin-bottom: 15px;
-      color: #1e293b;
+    .card p { font-size: 13px; color: #6b7280; margin-bottom: 6px; }
+    .card h2 { font-size: 22px; color: #111827; }
+    .card.pagar h2 { color: #dc2626; }
+    .card.pagas h2 { color: #059669; }
+    .toolbar { margin-bottom: 16px; }
+    .table-wrap {
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
     }
-
-    .card p {
-      line-height: 1.6;
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 14px 16px; text-align: left; font-size: 14px; }
+    th { background: #f9fafb; color: #4b5563; font-weight: 600; }
+    tbody tr { border-top: 1px solid #f3f4f6; }
+    tbody tr:hover { background: #f9fafb; }
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
     }
-
-    @media (max-width: 768px) {
-      .sidebar {
-        width: 200px;
-      }
-
-      .main {
-        padding: 20px;
-      }
+    .badge-pago { background: #d1fae5; color: #065f46; }
+    .badge-pendente { background: #fee2e2; color: #991b1b; }
+    .empty { text-align: center; padding: 40px; color: #6b7280; }
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
     }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: #fff;
+      border-radius: 14px;
+      width: 100%;
+      max-width: 480px;
+      padding: 28px;
+      box-shadow: 0 20px 25px rgba(0,0,0,0.15);
+      animation: fadeIn 0.2s ease;
+    }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .modal h2 { margin-bottom: 20px; font-size: 20px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 13px; font-weight: 600; color: #374151; margin-bottom: 6px; }
+    .form-group input, .form-group select {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 14px;
+      outline: none;
+    }
+    .form-group input:focus, .form-group select:focus { border-color: #2563eb; }
+    .form-group.checkbox { display: flex; align-items: center; gap: 10px; }
+    .form-group.checkbox input { width: auto; }
+    .form-group.checkbox label { margin: 0; }
+    .modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 8px; }
+    .loading { opacity: 0.7; pointer-events: none; }
+    .hidden { display: none; }
+    .user-info { margin-top: 24px; padding: 0 24px; font-size: 13px; color: #c7d2fe; }
   </style>
 </head>
 <body>
 
-  <div class="sidebar">
-    <img src="logo.png" alt="Pague com Controle" style="width: 100%; max-width: 180px; margin: 0 auto 30px; display: block; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
-    <div class="menu-item active" onclick="window.mudarSessao('dashboard')">
-      <span>📊</span> Dashboard
+  <aside class="sidebar">
+    <div class="logo-area">
+      <img src="logo.png" alt="Logo Pague com Controle" />
     </div>
-    <div class="menu-item" onclick="window.mudarSessao('relatorios')">
-      <span>📄</span> Relatórios
-    </div>
-    <div class="menu-item" onclick="window.mudarSessao('configuracoes')">
-      <span>⚙️</span> Configurações
-    </div>
+    <ul class="menu">
+      <li><a href="#" class="active">Dashboard</a></li>
+      <li><a href="#">Relatórios</a></li>
+      <li><a href="#">Configurações</a></li>
+      <li><button id="btn-sair">Sair</button></li>
+    </ul>
+    <div class="user-info" id="user-info">Carregando...</div>
+  </aside>
 
-    <div class="logout" onclick="window.sair()">
-      <span>🚪</span> Sair
-    </div>
-  </div>
-
-  <div class="main">
+  <main class="main">
     <div class="header">
-      <h1 id="titulo-pagina">Dashboard</h1>
+      <h1>Dashboard</h1>
+      <button id="btn-nova-conta" class="btn btn-primary">+ Nova Conta</button>
     </div>
 
-    <section id="secao-dashboard" class="secao active">
-      <div class="card">
-        <h3>Bem-vindo ao Pague com Controle</h3>
-        <p>Acompanhe seus pagamentos, visualize relatórios e ajuste suas configurações de forma simples.</p>
+    <div class="cards">
+      <div class="card pagar">
+        <p>Total a Pagar</p>
+        <h2 id="total-pagar">R$ 0,00</h2>
       </div>
-      <div class="card">
-        <h3>Resumo</h3>
-        <p>Aqui será exibido o conteúdo principal do seu dashboard.</p>
+      <div class="card pagas">
+        <p>Contas Pagas</p>
+        <h2 id="total-pagas">R$ 0,00</h2>
       </div>
-    </section>
+    </div>
 
-    <section id="secao-relatorios" class="secao">
-      <div class="card">
-        <h3>Relatórios</h3>
-        <p>Gere e visualize relatórios financeiros detalhados.</p>
-      </div>
-    </section>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Descrição</th>
+            <th>Valor</th>
+            <th>Vencimento</th>
+            <th>Categoria</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="tabela-contas">
+          <tr id="empty-row">
+            <td colspan="6" class="empty">Nenhuma conta cadastrada.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
 
-    <section id="secao-configuracoes" class="secao">
-      <div class="card">
-        <h3>Configurações</h3>
-        <p>Altere as preferências da sua conta e do sistema.</p>
-      </div>
-    </section>
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal">
+      <h2>Nova Conta</h2>
+      <form id="form-conta">
+        <div class="form-group">
+          <label for="descricao">Descrição</label>
+          <input type="text" id="descricao" required placeholder="Ex: Conta de luz" />
+        </div>
+        <div class="form-group">
+          <label for="valor">Valor</label>
+          <input type="number" id="valor" step="0.01" min="0.01" required placeholder="0,00" />
+        </div>
+        <div class="form-group">
+          <label for="vencimento">Vencimento</label>
+          <input type="date" id="vencimento" required />
+        </div>
+        <div class="form-group">
+          <label for="categoria">Categoria</label>
+          <select id="categoria" required>
+            <option value="">Selecione</option>
+            <option value="Moradia">Moradia</option>
+            <option value="Alimentação">Alimentação</option>
+            <option value="Transporte">Transporte</option>
+            <option value="Saúde">Saúde</option>
+            <option value="Educação">Educação</option>
+            <option value="Lazer">Lazer</option>
+            <option value="Outros">Outros</option>
+          </select>
+        </div>
+        <div class="form-group checkbox">
+          <input type="checkbox" id="pago" />
+          <label for="pago">Marcar como pago</label>
+        </div>
+        <div class="modal-actions">
+          <button type="button" id="btn-cancelar" class="btn btn-secondary">Cancelar</button>
+          <button type="submit" id="btn-salvar" class="btn btn-primary">Salvar</button>
+        </div>
+      </form>
+    </div>
   </div>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "firebase/app": "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js",
+      "firebase/auth": "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js",
+      "firebase/firestore": "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js"
+    }
+  }
+  </script>
 
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
-    import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+    import { initializeApp } from "firebase/app";
+    import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+    import {
+      getFirestore,
+      collection,
+      addDoc,
+      query,
+      where,
+      getDocs,
+      doc,
+      updateDoc
+    } from "firebase/firestore";
 
     const firebaseConfig = {
       apiKey: "AIzaSyB7JQAelkgWif5AttFqtiCJAfgxxsDuYZQ",
@@ -190,51 +300,199 @@
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const tabelaContas = document.getElementById("tabela-contas");
+    const totalPagarEl = document.getElementById("total-pagar");
+    const totalPagasEl = document.getElementById("total-pagas");
+    const userInfoEl = document.getElementById("user-info");
+    const modalOverlay = document.getElementById("modal-overlay");
+    const formConta = document.getElementById("form-conta");
+    const btnNovaConta = document.getElementById("btn-nova-conta");
+    const btnCancelar = document.getElementById("btn-cancelar");
+    const btnSair = document.getElementById("btn-sair");
+    const btnSalvar = document.getElementById("btn-salvar");
+
+    let usuarioAtual = null;
+
+    const abrirModal = () => {
+      formConta.reset();
+      modalOverlay.classList.add("open");
+    };
+
+    const fecharModal = () => {
+      modalOverlay.classList.remove("open");
+    };
+
+    const formatarMoeda = (valor) => {
+      return new Intl.NumberFormat("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+      }).format(valor || 0);
+    };
+
+    const formatarData = (dataString) => {
+      if (!dataString) return "-";
+      const data = new Date(dataString + "T00:00:00");
+      return data.toLocaleDateString("pt-BR");
+    };
+
+    const renderizarContas = (contas) => {
+      tabelaContas.innerHTML = "";
+
+      let totalPagar = 0;
+      let totalPagas = 0;
+
+      if (contas.length === 0) {
+        tabelaContas.innerHTML = `
+          <tr id="empty-row">
+            <td colspan="6" class="empty">Nenhuma conta cadastrada.</td>
+          </tr>
+        `;
+        totalPagarEl.textContent = formatarMoeda(0);
+        totalPagasEl.textContent = formatarMoeda(0);
+        return;
+      }
+
+      contas.forEach((item) => {
+        const conta = item.data;
+        const valor = parseFloat(conta.valor) || 0;
+
+        if (conta.pago) {
+          totalPagas += valor;
+        } else {
+          totalPagar += valor;
+        }
+
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${conta.descricao || "-"}</td>
+          <td>${formatarMoeda(valor)}</td>
+          <td>${formatarData(conta.vencimento)}</td>
+          <td>${conta.categoria || "-"}</td>
+          <td>
+            <span class="badge ${conta.pago ? 'badge-pago' : 'badge-pendente'}">
+              ${conta.pago ? "Pago" : "Pendente"}
+            </span>
+          </td>
+          <td>
+            <button class="btn btn-${conta.pago ? 'secondary' : 'success'} btn-toggle" data-id="${item.id}" data-pago="${conta.pago ? 'true' : 'false'}">
+              ${conta.pago ? "Marcar pendente" : "Marcar pago"}
+            </button>
+          </td>
+        `;
+        tabelaContas.appendChild(tr);
+      });
+
+      totalPagarEl.textContent = formatarMoeda(totalPagar);
+      totalPagasEl.textContent = formatarMoeda(totalPagas);
+
+      document.querySelectorAll(".btn-toggle").forEach((botao) => {
+        botao.addEventListener("click", async (e) => {
+          const id = e.target.dataset.id;
+          const pago = e.target.dataset.pago === "true";
+          await alternarStatus(id, !pago);
+        });
+      });
+    };
+
+    const carregarContas = async (userId) => {
+      try {
+        const q = query(
+          collection(db, "contas"),
+          where("userId", "==", userId),
+          orderBy("vencimento", "desc")
+        );
+        const snapshot = await getDocs(q);
+        const contas = [];
+        snapshot.forEach((docSnap) => {
+          contas.push({ id: docSnap.id, data: docSnap.data() });
+        });
+        renderizarContas(contas);
+      } catch (erro) {
+        console.error("Erro ao carregar contas:", erro);
+        alert("Erro ao carregar contas. Verifique o console.");
+      }
+    };
+
+    const salvarConta = async (dados) => {
+      try {
+        await addDoc(collection(db, "contas"), dados);
+        await carregarContas(usuarioAtual.uid);
+        fecharModal();
+      } catch (erro) {
+        console.error("Erro ao salvar conta:", erro);
+        alert("Erro ao salvar conta. Verifique o console.");
+      } finally {
+        btnSalvar.classList.remove("loading");
+        btnSalvar.textContent = "Salvar";
+      }
+    };
+
+    const alternarStatus = async (id, novoStatus) => {
+      try {
+        const ref = doc(db, "contas", id);
+        await updateDoc(ref, { pago: novoStatus });
+        await carregarContas(usuarioAtual.uid);
+      } catch (erro) {
+        console.error("Erro ao atualizar status:", erro);
+        alert("Erro ao atualizar status.");
+      }
+    };
 
     onAuthStateChanged(auth, (user) => {
-      if (!user) {
+      if (user) {
+        usuarioAtual = user;
+        userInfoEl.textContent = `Olá, ${user.email}`;
+        carregarContas(user.uid);
+      } else {
+        usuarioAtual = null;
+        userInfoEl.textContent = "Nenhum usuário logado";
         window.location.href = "login.html";
       }
     });
 
-    window.mudarSessao = function (nomeSessao) {
-      const secoes = document.querySelectorAll('.secao');
-      const itensMenu = document.querySelectorAll('.menu-item');
-      const titulo = document.getElementById('titulo-pagina');
+    btnNovaConta.addEventListener("click", abrirModal);
+    btnCancelar.addEventListener("click", fecharModal);
+    modalOverlay.addEventListener("click", (e) => {
+      if (e.target === modalOverlay) fecharModal();
+    });
 
-      secoes.forEach((secao) => secao.classList.remove('active'));
-      itensMenu.forEach((item) => item.classList.remove('active'));
+    formConta.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (!usuarioAtual) return;
 
-      const secaoAtiva = document.getElementById('secao-' + nomeSessao);
-      if (secaoAtiva) {
-        secaoAtiva.classList.add('active');
-      }
+      btnSalvar.classList.add("loading");
+      btnSalvar.textContent = "Salvando...";
 
-      const menuAtivo = document.querySelector('.menu-item[onclick*="' + nomeSessao + '"]');
-      if (menuAtivo) {
-        menuAtivo.classList.add('active');
-      }
+      const descricao = document.getElementById("descricao").value.trim();
+      const valor = parseFloat(document.getElementById("valor").value);
+      const vencimento = document.getElementById("vencimento").value;
+      const categoria = document.getElementById("categoria").value;
+      const pago = document.getElementById("pago").checked;
 
-      const titulos = {
-        dashboard: 'Dashboard',
-        relatorios: 'Relatórios',
-        configuracoes: 'Configurações'
+      const dados = {
+        userId: usuarioAtual.uid,
+        descricao,
+        valor,
+        vencimento,
+        categoria,
+        pago,
+        criadoEm: new Date().toISOString()
       };
 
-      titulo.textContent = titulos[nomeSessao] || 'Dashboard';
-    };
+      salvarConta(dados);
+    });
 
-    window.sair = function () {
-      signOut(auth)
-        .then(() => {
-          window.location.href = "login.html";
-        })
-        .catch((error) => {
-          console.error("Erro ao sair:", error);
-          alert("Não foi possível sair. Tente novamente.");
-        });
-    };
+    btnSair.addEventListener("click", async () => {
+      try {
+        await signOut(auth);
+        window.location.href = "login.html";
+      } catch (erro) {
+        console.error("Erro ao sair:", erro);
+        alert("Erro ao sair.");
+      }
+    });
   </script>
-
 </body>
 </html>
