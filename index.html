@@ -1,45 +1,32 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Pague com Controle - Assinatura mensal para organizar suas contas com desconto nos primeiros 100 inscritos.">
-  <title>Pague com Controle - Assinatura Mensal</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Assuma o Controle das Suas Contas</title>
   <style>
-    :root {
-      --bg: #F9F7F2;
-      --primary: #2D5A46;
-      --primary-dark: #234839;
-      --text: #1a1a1a;
-      --muted: #555555;
-      --white: #ffffff;
-      --accent: #e9f0ec;
-      --border: #d8e0db;
-    }
-
+    /* ===== Reset e Base ===== */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
-    html {
-      scroll-behavior: smooth;
+    :root {
+      --verde-escuro: #1E4636;
+      --verde-claro: #8FB399;
+      --creme: #FBF8F2;
+      --branco: #FFFFFF;
+      --sombra: 0 8px 24px rgba(30, 70, 54, 0.08);
+      --sombra-hover: 0 12px 32px rgba(30, 70, 54, 0.16);
     }
 
     body {
-      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
+      font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: var(--creme);
+      color: var(--verde-escuro);
       line-height: 1.6;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
+      -webkit-font-smoothing: antialiased;
     }
 
     a {
@@ -51,626 +38,345 @@
       width: 100%;
       max-width: 1140px;
       margin: 0 auto;
-      padding: 0 20px;
+      padding: 0 24px;
     }
 
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      font-weight: 700;
-      font-size: 1rem;
-      padding: 14px 28px;
-      border-radius: 10px;
-      border: none;
-      cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
-    }
-
-    .btn-primary {
-      background-color: var(--primary);
-      color: var(--white);
-      box-shadow: 0 8px 20px rgba(45, 90, 70, 0.25);
-    }
-
-    .btn-primary:hover {
-      background-color: var(--primary-dark);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 24px rgba(45, 90, 70, 0.3);
-    }
-
-    .btn-large {
-      padding: 18px 36px;
-      font-size: 1.1rem;
-    }
-
-    .badge {
-      display: inline-block;
-      background-color: var(--primary);
-      color: var(--white);
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      padding: 6px 12px;
-      border-radius: 999px;
-    }
-
-    header {
-      background-color: var(--bg);
-      padding: 16px 0;
+    /* ===== Header ===== */
+    .header {
+      background-color: var(--branco);
+      box-shadow: 0 2px 12px rgba(30, 70, 54, 0.06);
       position: sticky;
       top: 0;
       z-index: 100;
-      border-bottom: 1px solid var(--border);
     }
 
-    header .container {
+    .header .container {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      height: 76px;
     }
 
     .logo {
-      font-weight: 800;
-      font-size: 1.35rem;
-      color: var(--primary);
+      height: 44px;
+      width: auto;
+      display: block;
     }
 
+    .btn-login {
+      padding: 10px 22px;
+      border: 2px solid var(--verde-escuro);
+      border-radius: 999px;
+      color: var(--verde-escuro);
+      font-weight: 600;
+      font-size: 15px;
+      transition: all 0.25s ease;
+    }
+
+    .btn-login:hover {
+      background-color: var(--verde-escuro);
+      color: var(--branco);
+    }
+
+    /* ===== Hero ===== */
     .hero {
-      padding: 72px 0 64px;
+      padding: 96px 0 80px;
       text-align: center;
+      background: linear-gradient(180deg, var(--creme) 0%, var(--branco) 100%);
     }
 
     .hero h1 {
-      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-size: clamp(2rem, 5vw, 3.4rem);
       font-weight: 800;
       line-height: 1.15;
-      margin: 20px 0 18px;
-      color: var(--text);
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
     }
 
     .hero h1 span {
-      color: var(--primary);
+      color: var(--verde-claro);
     }
 
-    .hero p {
-      font-size: 1.15rem;
-      color: var(--muted);
-      max-width: 620px;
-      margin: 0 auto 28px;
+    .hero p.subtitulo {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: #4a5a52;
+      max-width: 640px;
+      margin: 0 auto 36px;
     }
 
-    .features {
-      padding: 64px 0;
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 24px;
-      margin-top: 40px;
-    }
-
-    .feature-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 28px;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .feature-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
-    }
-
-    .feature-icon {
-      width: 48px;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: var(--accent);
-      color: var(--primary);
-      border-radius: 12px;
-      font-size: 1.5rem;
-      margin-bottom: 16px;
-    }
-
-    .feature-card h3 {
-      font-size: 1.1rem;
+    .btn-cta {
+      display: inline-block;
+      background-color: var(--verde-escuro);
+      color: var(--branco);
+      padding: 16px 40px;
+      border-radius: 999px;
+      font-size: 18px;
       font-weight: 700;
-      margin-bottom: 8px;
+      box-shadow: var(--sombra);
+      transition: all 0.25s ease;
     }
 
-    .feature-card p {
-      font-size: 0.95rem;
-      color: var(--muted);
+    .btn-cta:hover {
+      background-color: #16412f;
+      box-shadow: var(--sombra-hover);
+      transform: translateY(-2px);
+    }
+
+    .hero .preco-info {
+      margin-top: 14px;
+      font-size: 14px;
+      color: #6b7b73;
+    }
+
+    /* ===== Features ===== */
+    .features {
+      padding: 80px 0;
+      background-color: var(--branco);
     }
 
     .section-title {
       text-align: center;
-      max-width: 700px;
-      margin: 0 auto 16px;
-      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
       font-weight: 800;
-      color: var(--text);
+      margin-bottom: 12px;
     }
 
     .section-subtitle {
       text-align: center;
-      color: var(--muted);
-      max-width: 640px;
-      margin: 0 auto 40px;
-    }
-
-    .offer {
-      padding: 72px 0;
-      background-color: var(--white);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .offer-card {
+      color: #6b7b73;
       max-width: 560px;
-      margin: 0 auto;
-      background: var(--bg);
-      border: 2px solid var(--primary);
-      border-radius: 24px;
-      padding: 40px 32px;
+      margin: 0 auto 56px;
+      font-size: 1.05rem;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 28px;
+    }
+
+    .card {
+      background-color: var(--creme);
+      border: 1px solid rgba(143, 179, 153, 0.25);
+      border-radius: 18px;
+      padding: 36px 28px;
       text-align: center;
-      position: relative;
+      transition: all 0.25s ease;
     }
 
-    .offer-card .badge {
-      position: absolute;
-      top: -14px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 0.8rem;
-      padding: 8px 16px;
-      box-shadow: 0 4px 12px rgba(45, 90, 70, 0.2);
+    .card:hover {
+      box-shadow: var(--sombra-hover);
+      transform: translateY(-4px);
     }
 
-    .offer-card h2 {
-      font-size: 1.8rem;
-      font-weight: 800;
-      margin-bottom: 8px;
-      color: var(--primary);
+    .card .icone {
+      font-size: 44px;
+      margin-bottom: 18px;
+      display: block;
     }
 
-    .offer-card .price {
+    .card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      color: var(--verde-escuro);
+    }
+
+    .card p {
+      color: #5a6b63;
+      font-size: 1rem;
+    }
+
+    /* ===== Pricing ===== */
+    .pricing {
+      padding: 80px 0;
+      background: linear-gradient(180deg, var(--creme) 0%, var(--branco) 100%);
+    }
+
+    .plano {
+      max-width: 420px;
+      margin: 0 auto;
+      background-color: var(--branco);
+      border: 2px solid var(--verde-claro);
+      border-radius: 24px;
+      padding: 48px 36px;
+      text-align: center;
+      box-shadow: var(--sombra);
+    }
+
+    .plano .selo {
+      display: inline-block;
+      background-color: var(--verde-claro);
+      color: var(--verde-escuro);
+      font-weight: 700;
+      font-size: 13px;
+      padding: 6px 16px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .plano h3 {
+      font-size: 1.5rem;
+      margin-bottom: 16px;
+    }
+
+    .plano .preco {
       font-size: 3.2rem;
       font-weight: 800;
-      color: var(--text);
-      margin: 14px 0 4px;
+      color: var(--verde-escuro);
+      line-height: 1;
     }
 
-    .offer-card .price-detail {
-      color: var(--muted);
-      font-size: 0.95rem;
-      margin-bottom: 24px;
+    .plano .preco small {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #6b7b73;
     }
 
-    .offer-list {
-      text-align: left;
+    .plano ul {
       list-style: none;
-      margin: 0 0 28px;
-      padding: 0;
+      margin: 28px 0;
+      text-align: left;
     }
 
-    .offer-list li {
-      padding: 8px 0;
-      font-size: 0.95rem;
+    .plano ul li {
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(143, 179, 153, 0.2);
+      color: #4a5a52;
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       gap: 10px;
     }
 
-    .offer-list li::before {
+    .plano ul li:last-child {
+      border-bottom: none;
+    }
+
+    .plano ul li::before {
       content: "✓";
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 22px;
-      height: 22px;
-      background-color: var(--primary);
-      color: var(--white);
-      border-radius: 50%;
-      font-size: 0.75rem;
-      font-weight: 700;
-      margin-top: 2px;
-    }
-
-    .spots {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background-color: #fff3e6;
-      color: #944b00;
-      padding: 10px 16px;
-      border-radius: 10px;
-      font-weight: 700;
-      font-size: 0.9rem;
-      margin-bottom: 20px;
-    }
-
-    .referral {
-      padding: 72px 0;
-    }
-
-    .referral-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 40px;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 28px;
-      align-items: center;
-    }
-
-    @media (min-width: 768px) {
-      .referral-card {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    .referral-card h2 {
-      font-size: 1.8rem;
+      color: var(--verde-escuro);
       font-weight: 800;
-      margin-bottom: 14px;
-      color: var(--text);
     }
 
-    .referral-card p {
-      color: var(--muted);
-      margin-bottom: 14px;
-    }
-
-    .referral-highlight {
-      font-size: 2rem;
-      font-weight: 800;
-      color: var(--primary);
-      display: block;
-      margin: 10px 0;
-    }
-
-    .guarantee {
-      padding: 64px 0;
-      background-color: var(--white);
-      border-top: 1px solid var(--border);
-    }
-
-    .guarantee-card {
-      max-width: 720px;
-      margin: 0 auto;
-      text-align: center;
-      padding: 36px 28px;
-      background: var(--bg);
-      border-radius: 20px;
-      border: 1px solid var(--border);
-    }
-
-    .guarantee-icon {
-      font-size: 3rem;
-      margin-bottom: 14px;
-    }
-
-    .guarantee h2 {
-      font-size: 1.6rem;
-      font-weight: 800;
-      margin-bottom: 10px;
-    }
-
-    .guarantee p {
-      color: var(--muted);
-    }
-
-    .faq {
-      padding: 72px 0;
-    }
-
-    .faq-list {
-      max-width: 720px;
-      margin: 0 auto;
-    }
-
-    .faq-item {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      margin-bottom: 14px;
-      overflow: hidden;
-    }
-
-    .faq-question {
+    .plano .btn-cta {
       width: 100%;
-      background: none;
-      border: none;
-      text-align: left;
-      padding: 18px 22px;
-      font-size: 1rem;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: var(--text);
     }
 
-    .faq-question::after {
-      content: "+";
-      font-size: 1.4rem;
-      color: var(--primary);
-      transition: transform 0.2s;
-    }
-
-    .faq-item.active .faq-question::after {
-      content: "−";
-    }
-
-    .faq-answer {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease, padding 0.3s ease;
-      padding: 0 22px;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .faq-item.active .faq-answer {
-      max-height: 300px;
-      padding: 0 22px 18px;
-    }
-
-    footer {
-      background-color: var(--primary);
-      color: var(--white);
-      padding: 40px 0 24px;
+    /* ===== Footer ===== */
+    .footer {
+      background-color: var(--verde-escuro);
+      color: var(--creme);
+      padding: 32px 0;
       text-align: center;
     }
 
-    footer p {
-      font-size: 0.9rem;
-      opacity: 0.85;
-      margin-bottom: 8px;
-    }
-
-    footer a {
-      color: var(--white);
-      text-decoration: underline;
+    .footer p {
+      font-size: 14px;
       opacity: 0.9;
     }
 
-    .whatsapp {
-      position: fixed;
-      bottom: 22px;
-      right: 22px;
-      width: 58px;
-      height: 58px;
-      background-color: #25d366;
-      color: var(--white);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.8rem;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
-      z-index: 1000;
-      transition: transform 0.2s;
-    }
-
-    .whatsapp:hover {
-      transform: scale(1.08);
-    }
-
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
-    }
-
-    @media (max-width: 480px) {
-      .offer-card {
-        padding: 32px 22px;
+    /* ===== Responsivo ===== */
+    @media (max-width: 600px) {
+      .hero {
+        padding: 64px 0 56px;
       }
-      .offer-card .price {
-        font-size: 2.6rem;
+      .features, .pricing {
+        padding: 56px 0;
       }
-      .btn-large {
+      .btn-cta {
+        width: 100%;
         padding: 16px 24px;
-        font-size: 1rem;
       }
     }
   </style>
 </head>
 <body>
-  <header>
+
+  <!-- ===== Header ===== -->
+  <header class="header">
     <div class="container">
-      <a href="#" class="logo">Pague com Controle</a>
-      <a href="#oferta" class="btn btn-primary">Ver Oferta Especial</a>
+      <a href="index.html">
+        <img src="logo.png" alt="Logo" class="logo" />
+      </a>
+      <a href="login.html" class="btn-login">Entrar</a>
     </div>
   </header>
 
-  <main>
-    <section class="hero">
-      <div class="container">
-        <span class="badge">Assinatura Mensal</span>
-        <h1>Organize suas contas e pare de <span>perder dinheiro</span> com juros</h1>
-        <p>Controle completo de boletos, faturas e gastos em um só lugar. Assinatura acessível para quem quer tranquilidade financeira.</p>
-        <a href="#oferta" class="btn btn-primary btn-large">Garantir Minha Vaga</a>
-      </div>
-    </section>
-
-    <section class="features">
-      <div class="container">
-        <h2 class="section-title">Tudo o que você precisa para dominar suas finanças</h2>
-        <p class="section-subtitle">Prático, direto e feito para quem quer resultados sem complicação.</p>
-        <div class="features-grid">
-          <div class="feature-card">
-            <div class="feature-icon">📅</div>
-            <h3>Lembretes automáticos</h3>
-            <p>Receba alertas de vencimento para nunca mais pagar multa ou juros por atraso.</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">📊</div>
-            <h3>Dashboard financeiro</h3>
-            <p>Visualize entradas, saídas e saldo de um jeito simples e objetivo.</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">📎</div>
-            <h3>Anexos organizados</h3>
-            <p>Guarde comprovantes, boletos e notas fiscais em um só lugar.</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">🎯</div>
-            <h3>Metas e planejamento</h3>
-            <p>Crie objetivos financeiros e acompanhe sua evolução mês a mês.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="oferta" class="offer">
-      <div class="container">
-        <div class="offer-card">
-          <span class="badge">Oferta Especial - 100 Primeiros</span>
-          <h2>Assinatura Mensal</h2>
-          <p class="price-detail">Acesso completo, sem limite de contas</p>
-          <div class="price">R$ 15<small style="font-size:1.2rem;font-weight:600;">/mês</small></div>
-          <p class="price-detail">Cobrança recorrente mensal • Cancele quando quiser</p>
-
-          <div class="spots">
-            <span>🔥</span>
-            <span>Vagas limitadas para os 100 primeiros inscritos</span>
-          </div>
-
-          <ul class="offer-list">
-            <li>Acesso a todas as funcionalidades</li>
-            <li>Atualizações e melhorias constantes</li>
-            <li>Suporte por e-mail e WhatsApp</li>
-            <li>Cancele a qualquer momento, sem burocracia</li>
-          </ul>
-
-          <a href="https://www.asaas.com/c/cl1s151715642sjm" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-large">
-            Assinar Agora por R$ 15/mês
-          </a>
-          <p style="margin-top:14px;font-size:0.85rem;color:var(--muted);">Pagamento processado com segurança pelo Asaas.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="referral">
-      <div class="container">
-        <div class="referral-card">
-          <div>
-            <span class="badge">Indique e Ganhe</span>
-            <h2>Quanto mais amigos usarem, menos você paga</h2>
-            <p>Indique o Pague com Controle para quem também quer organizar as finanças. Cada amigo ativo na assinatura mensal gera desconto para você.</p>
-            <span class="referral-highlight">R$ 1 de desconto por indicado ativo</span>
-            <p style="font-size:0.9rem;">Indique vários amigos e acumule descontos na sua mensalidade. Quanto mais pessoas ativas, maior a sua economia.</p>
-            <a href="#oferta" class="btn btn-primary">Quero Aproveitar</a>
-          </div>
-          <div style="background:var(--accent);border-radius:18px;padding:32px;text-align:center;">
-            <div style="font-size:4rem;margin-bottom:10px;">🎁</div>
-            <p style="font-weight:700;color:var(--primary);font-size:1.1rem;">Exemplo: 5 amigos ativos = R$ 5 de desconto</p>
-            <p style="font-size:0.9rem;color:var(--muted);margin-top:8px;">Sua assinatura mensal pode sair por muito menos.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="guarantee">
-      <div class="container">
-        <div class="guarantee-card">
-          <div class="guarantee-icon">🛡️</div>
-          <h2>Garantia Incondicional de 45 Dias</h2>
-          <p>Teste o Pague com Controle por 45 dias. Se por qualquer motivo você não sentir que valeu a pena, devolvemos 100% do valor pago. Sem perguntas, sem burocracia.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="faq">
-      <div class="container">
-        <h2 class="section-title">Perguntas Frequentes</h2>
-        <p class="section-subtitle">Tire suas dúvidas sobre a assinatura mensal.</p>
-        <div class="faq-list">
-          <div class="faq-item">
-            <button class="faq-question">A assinatura é realmente mensal?</button>
-            <div class="faq-answer">
-              <p>Sim. Você paga R$ 15 todo mês e tem acesso completo ao Pague com Controle. A cobrança é recorrente e pode ser cancelada quando quiser.</p>
-            </div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-question">Posso cancelar a qualquer momento?</button>
-            <div class="faq-answer">
-              <p>Sim. O cancelamento é simples e sem burocracia. Você pode cancelar diretamente na plataforma de pagamento.</p>
-            </div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-question">Como funciona o programa Indique e Ganhe?</button>
-            <div class="faq-answer">
-              <p>Para cada pessoa que você indicar e que mantiver a assinatura mensal ativa, você recebe R$ 1 de desconto na sua mensalidade.</p>
-            </div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-question">O pagamento é seguro?</button>
-            <div class="faq-answer">
-              <p>Sim. Utilizamos o Asaas, gateway de pagamento reconhecido e seguro, para processar todas as transações.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
+  <!-- ===== Hero ===== -->
+  <section class="hero">
     <div class="container">
-      <p><strong>Pague com Controle</strong></p>
-      <p>Assinatura mensal de R$ 15. Cancele quando quiser.</p>
-      <p style="margin-top:12px;"><a href="#oferta">Garantir minha vaga</a></p>
-      <p style="margin-top:20px;font-size:0.8rem;opacity:0.7;">© 2024 Pague com Controle. Todos os direitos reservados.</p>
+      <h1>Assuma o Controle das <span>Suas Contas</span></h1>
+      <p class="subtitulo">
+        Organize, acompanhe e quite suas contas sem complicação. Simples, seguro e feito para você que quer tranquilidade financeira todos os meses.
+      </p>
+      <!-- ============================================================ -->
+      <!-- COLE SEU LINK DO ASAAS AQUI  (substitua o # abaixo)           -->
+      <!-- ============================================================ -->
+      <a href="https://www.asaas.com/c/cl1s151715642sjm" class="btn-cta">Assinar Agora por R$ 15/mês</a>
+      <p class="preco-info">Cancele quando quiser. Sem fidelidade.</p>
+    </div>
+  </section>
+
+  <!-- ===== Features ===== -->
+  <section class="features">
+    <div class="container">
+      <h2 class="section-title">Tudo o que você precisa</h2>
+      <p class="section-subtitle">Recursos pensados para facilitar a sua vida financeira do dia a dia.</p>
+
+      <div class="cards">
+        <div class="card">
+          <span class="icone">🗂️</span>
+          <h3>Organização</h3>
+          <p>Tenha todas as suas contas em um só lugar, com lembretes e status de pagamento sempre à mão.</p>
+        </div>
+
+        <div class="card">
+          <span class="icone">✨</span>
+          <h3>Simplicidade</h3>
+          <p>Uma interface limpa e intuitiva, criada para qualquer pessoa usar sem precisar de conhecimento técnico.</p>
+        </div>
+
+        <div class="card">
+          <span class="icone">🔒</span>
+          <h3>Segurança</h3>
+          <p>Seus dados protegidos com criptografia e total privacidade. Você no controle de tudo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Pricing ===== -->
+  <section class="pricing">
+    <div class="container">
+      <h2 class="section-title">Plano simples e transparente</h2>
+      <p class="section-subtitle">Um único plano, com tudo incluso, por um preço que cabe no seu bolso.</p>
+
+      <div class="plano">
+        <span class="selo">Mais popular</span>
+        <h3>Plano Mensal</h3>
+        <div class="preco">R$ 15<small>/mês</small></div>
+        <ul>
+          <li>Contas e lembretes ilimitados</li>
+          <li>Relatórios e resumos mensais</li>
+          <li>Acesso de qualquer dispositivo</li>
+          <li>Suporte dedicado</li>
+          <li>Cancele quando quiser</li>
+        </ul>
+        <!-- ============================================================ -->
+        <!-- COLE SEU LINK DO ASAAS AQUI  (substitua o # abaixo)           -->
+        <!-- ============================================================ -->
+        <a href="https://www.asaas.com/c/cl1s151715642sjm" class="btn-cta">Assinar Agora</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 Todos os direitos reservados.</p>
     </div>
   </footer>
 
-  <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" class="whatsapp" aria-label="Fale conosco pelo WhatsApp">
-    <span aria-hidden="true">💬</span>
-    <span class="sr-only">WhatsApp</span>
-  </a>
-
-  <script>
-    document.querySelectorAll('.faq-question').forEach(button => {
-      button.addEventListener('click', () => {
-        const item = button.parentElement;
-        const isActive = item.classList.contains('active');
-        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
-        if (!isActive) {
-          item.classList.add('active');
-        }
-      });
-    });
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        const href = this.getAttribute('href');
-        if (href !== '#') {
-          e.preventDefault();
-          const target = document.querySelector(href);
-          if (target) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
-        }
-      });
-    });
-  </script>
 </body>
 </html>
