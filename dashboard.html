@@ -3,222 +3,420 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Pague com Controle</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { display: flex; height: 100vh; background-color: #f3f4f6; }
-        .sidebar {
-            width: 260px;
-            background-color: #1e3a8a;
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-            padding: 24px 16px;
-        }
-        .logo-area { text-align: center; margin-bottom: 30px; }
-        .logo-area img { width: 140px; border-radius: 8px; }
-        .menu { flex: 1; }
-        .menu a {
-            display: block;
-            color: #dbeafe;
-            text-decoration: none;
-            padding: 12px 16px;
-            border-radius: 8px;
-            margin-bottom: 8px;
-            transition: 0.2s;
-        }
-        .menu a:hover, .menu a.active { background-color: #2563eb; color: #fff; }
-        .btn-sair {
-            background-color: #dc2626;
-            color: #fff;
-            border: none;
-            padding: 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: 0.2s;
-        }
-        .btn-sair:hover { background-color: #b91c1c; }
-        .main {
-            flex: 1;
-            padding: 30px;
-            overflow-y: auto;
-        }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 24px;
-        }
-        .header h1 { font-size: 24px; color: #111827; }
-        .btn-nova {
-            background-color: #16a34a;
-            color: #fff;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        .btn-nova:hover { background-color: #15803d; }
-        .cards { display: flex; gap: 20px; margin-bottom: 24px; }
-        .card {
-            background: #fff;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            flex: 1;
-        }
-        .card h3 { font-size: 14px; color: #6b7280; margin-bottom: 8px; }
-        .card p { font-size: 24px; font-weight: bold; color: #111827; }
-        .table-container {
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            padding: 20px;
-        }
-        table { width: 100%; border-collapse: collapse; }
-        th, td { padding: 14px; text-align: left; border-bottom: 1px solid #e5e7eb; }
-        th { color: #6b7280; font-size: 13px; text-transform: uppercase; }
-        .acoes button {
-            border: none;
-            padding: 8px 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 13px;
-            margin-right: 6px;
-        }
-        .btn-editar { background-color: #f59e0b; color: #fff; }
-        .btn-excluir { background-color: #dc2626; color: #fff; }
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.5);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-        .modal-content {
-            background: #fff;
-            padding: 28px;
-            border-radius: 12px;
-            width: 100%;
-            max-width: 460px;
-        }
-        .modal-content h2 { margin-bottom: 20px; color: #111827; }
-        .campo { margin-bottom: 14px; }
-        .campo label { display: block; margin-bottom: 6px; color: #374151; font-size: 14px; }
-        .campo input, .campo select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #d1d5db;
-            border-radius: 8px;
-            font-size: 15px;
-        }
-        .modal-botoes { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
-        .btn-cancelar { background-color: #9ca3af; color: #fff; border: none; padding: 10px 18px; border-radius: 8px; cursor: pointer; }
-        .btn-salvar { background-color: #2563eb; color: #fff; border: none; padding: 10px 18px; border-radius: 8px; cursor: pointer; }
-        .empty { text-align: center; color: #6b7280; padding: 30px; }
-    </style>
-</head>
-<body>
-    <aside class="sidebar">
-        <div class="logo-area">
-            <img src="logo.png" alt="Logo Pague com Controle">
-        </div>
-        <nav class="menu">
-            <a href="#" class="active"><i class="fas fa-home"></i> Dashboard</a>
-            <a href="#"><i class="fas fa-chart-bar"></i> Relatórios</a>
-            <a href="#"><i class="fas fa-cog"></i> Configurações</a>
-        </nav>
-        <button class="btn-sair" onclick="sairDoSistema()"><i class="fas fa-sign-out-alt"></i> Sair</button>
-    </aside>
+    <title>Pague com Controle - Dashboard</title>
 
-    <main class="main">
-        <div class="header">
-            <h1>Minhas Contas</h1>
-            <button class="btn-nova" onclick="abrirModal()"><i class="fas fa-plus"></i> Nova Conta</button>
-        </div>
-
-        <div class="cards">
-            <div class="card">
-                <h3>Total em Contas</h3>
-                <p id="totalContas">R$ 0,00</p>
-            </div>
-            <div class="card">
-                <h3>Quantidade</h3>
-                <p id="qtdContas">0</p>
-            </div>
-        </div>
-
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Descrição</th>
-                        <th>Categoria</th>
-                        <th>Vencimento</th>
-                        <th>Valor</th>
-                        <th>Status</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody id="tabelaContas">
-                    <tr><td colspan="6" class="empty">Carregando...</td></tr>
-                </tbody>
-            </table>
-        </div>
-    </main>
-
-    <div class="modal" id="modalConta">
-        <div class="modal-content">
-            <h2 id="modalTitulo">Nova Conta</h2>
-            <input type="hidden" id="contaId">
-            <div class="campo">
-                <label>Descrição</label>
-                <input type="text" id="descricao" placeholder="Ex: Conta de luz">
-            </div>
-            <div class="campo">
-                <label>Categoria</label>
-                <select id="categoria">
-                    <option value="Moradia">Moradia</option>
-                    <option value="Alimentação">Alimentação</option>
-                    <option value="Transporte">Transporte</option>
-                    <option value="Saúde">Saúde</option>
-                    <option value="Lazer">Lazer</option>
-                    <option value="Outros">Outros</option>
-                </select>
-            </div>
-            <div class="campo">
-                <label>Vencimento</label>
-                <input type="date" id="vencimento">
-            </div>
-            <div class="campo">
-                <label>Valor</label>
-                <input type="number" id="valor" step="0.01" placeholder="0,00">
-            </div>
-            <div class="campo">
-                <label>Status</label>
-                <select id="status">
-                    <option value="Pendente">Pendente</option>
-                    <option value="Pago">Pago</option>
-                    <option value="Atrasado">Atrasado</option>
-                </select>
-            </div>
-            <div class="modal-botoes">
-                <button class="btn-cancelar" onclick="fecharModal()">Cancelar</button>
-                <button class="btn-salvar" onclick="salvarConta()">Salvar</button>
-            </div>
-        </div>
-    </div>
-
+    <!-- Firebase v8 (compatível) via CDN -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f6fa;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 260px;
+            background-color: #2c3e50;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            padding: 25px 0;
+            position: fixed;
+            height: 100vh;
+            left: 0;
+            top: 0;
+        }
+
+        .logo-area {
+            text-align: center;
+            padding: 0 20px 30px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo-area img {
+            max-width: 100%;
+            height: auto;
+            max-height: 80px;
+        }
+
+        .menu {
+            margin-top: 20px;
+            flex: 1;
+        }
+
+        .menu a {
+            display: block;
+            padding: 15px 25px;
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+            border-left: 4px solid transparent;
+        }
+
+        .menu a:hover,
+        .menu a.active {
+            background-color: #34495e;
+            color: white;
+            border-left: 4px solid #3498db;
+        }
+
+        .menu a i {
+            margin-right: 10px;
+        }
+
+        .btn-sair {
+            margin: 0 20px 20px 20px;
+            padding: 12px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .btn-sair:hover {
+            background-color: #c0392b;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 260px;
+            flex: 1;
+            padding: 30px;
+        }
+
+        .header {
+            background-color: white;
+            padding: 20px 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 24px;
+        }
+
+        .aba {
+            display: none;
+        }
+
+        .aba.ativa {
+            display: block;
+        }
+
+        /* Cards */
+        .card {
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+        }
+
+        .card h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        /* Formulário */
+        .form-row {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+            align-items: flex-end;
+        }
+
+        .form-group {
+            flex: 1;
+            min-width: 180px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            color: #555;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 15px;
+            transition: opacity 0.3s;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .btn-primary {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .btn-success {
+            background-color: #27ae60;
+            color: white;
+        }
+
+        .btn-warning {
+            background-color: #f39c12;
+            color: white;
+        }
+
+        .btn-danger {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        /* Tabela */
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .status-pago {
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .status-pendente {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .acoes button {
+            margin-right: 5px;
+            padding: 6px 12px;
+            font-size: 13px;
+        }
+
+        /* Total */
+        .total-box {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .total-box h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+            font-weight: normal;
+        }
+
+        .total-box .valor {
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        /* Mensagens */
+        .mensagem {
+            padding: 12px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        .mensagem.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .mensagem.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .usuario-info {
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo-area">
+            <img src="logo.png" alt="Logo Pague com Controle">
+        </div>
+
+        <nav class="menu">
+            <a href="#" onclick="mostrarAba('dashboard')" id="menu-dashboard" class="active">
+                📊 Dashboard
+            </a>
+            <a href="#" onclick="mostrarAba('relatorios')" id="menu-relatorios">
+                📄 Relatórios
+            </a>
+            <a href="#" onclick="mostrarAba('configuracoes')" id="menu-configuracoes">
+                ⚙️ Configurações
+            </a>
+        </nav>
+
+        <button class="btn-sair" onclick="sair()">🚪 Sair</button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="header">
+            <h1>Painel de Controle</h1>
+            <p class="usuario-info">Bem-vindo, <span id="email-usuario">usuário</span>!</p>
+        </div>
+
+        <!-- ABA DASHBOARD -->
+        <div id="dashboard" class="aba ativa">
+            <div class="total-box">
+                <h3>Total em Contas Cadastradas</h3>
+                <div class="valor" id="total-contas">R$ 0,00</div>
+            </div>
+
+            <div class="card">
+                <h2 id="titulo-form">Nova Conta</h2>
+                <div id="mensagem" class="mensagem"></div>
+
+                <form id="form-conta" onsubmit="salvarConta(event)">
+                    <input type="hidden" id="conta-id">
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="descricao">Descrição</label>
+                            <input type="text" id="descricao" placeholder="Ex: Conta de luz" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="valor">Valor (R$)</label>
+                            <input type="number" id="valor" step="0.01" placeholder="0,00" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="vencimento">Vencimento</label>
+                            <input type="date" id="vencimento" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="status">Status</label>
+                            <select id="status" required>
+                                <option value="Pendente">Pendente</option>
+                                <option value="Pago">Pago</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success" id="btn-salvar">💾 Salvar</button>
+                            <button type="button" class="btn btn-primary" onclick="limparFormulario()" style="margin-left: 8px;">
+                                🔄 Novo
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="card">
+                <h2>Minhas Contas</h2>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Descrição</th>
+                                <th>Valor</th>
+                                <th>Vencimento</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lista-contas">
+                            <tr>
+                                <td colspan="5" style="text-align: center;">Carregando...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ABA RELATÓRIOS -->
+        <div id="relatorios" class="aba">
+            <div class="card">
+                <h2>Relatórios</h2>
+                <p>Aqui você poderá gerar relatórios detalhados das suas contas.</p>
+                <br>
+                <p><strong>Total geral:</strong> <span id="relatorio-total">R$ 0,00</span></p>
+                <p><strong>Contas pendentes:</strong> <span id="relatorio-pendentes">0</span></p>
+                <p><strong>Contas pagas:</strong> <span id="relatorio-pagas">0</span></p>
+            </div>
+        </div>
+
+        <!-- ABA CONFIGURAÇÕES -->
+        <div id="configuracoes" class="aba">
+            <div class="card">
+                <h2>Configurações</h2>
+                <p>Configurações da conta e preferências do sistema.</p>
+                <br>
+                <p><strong>E-mail logado:</strong> <span id="config-email">-</span></p>
+                <br>
+                <button class="btn btn-danger" onclick="sair()">Sair da Conta</button>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // 1) Configuração do Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyB7JQAelkgWif5AttFqtiCJAfgxxsDuYZQ",
             authDomain: "pague-com-controle.firebaseapp.com",
@@ -228,160 +426,228 @@
             appId: "1:829210830790:web:b7a4822b4886471d4cb4c7"
         };
 
+        // 2) Inicializa o Firebase
         firebase.initializeApp(firebaseConfig);
-        const db = firebase.firestore();
+
+        // 3) Referências aos serviços
         const auth = firebase.auth();
+        const db = firebase.firestore();
 
-        const contasCarregadas = {};
+        // Coleção onde as contas serão salvas
+        const contasRef = db.collection("contas");
 
-        auth.onAuthStateChanged(user => {
-            if (!user) {
-                window.location.href = "login.html";
+        // 4) Variáveis de controle
+        let contasCache = [];
+        let idUsuarioAtual = null;
+
+        // 5) Verifica se o usuário está logado
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                idUsuarioAtual = user.uid;
+                document.getElementById("email-usuario").textContent = user.email;
+                document.getElementById("config-email").textContent = user.email;
+                listarContasEmTempoReal();
             } else {
-                carregarContas();
+                // Se não estiver logado, redireciona para login (ajuste conforme sua página)
+                window.location.href = "login.html";
             }
         });
 
-        function sairDoSistema() {
-            auth.signOut().then(() => {
-                window.location.href = "login.html";
-            }).catch(err => {
-                alert("Erro ao sair: " + err.message);
+        // 6) FUNÇÃO DAS ABAS
+        function mostrarAba(id) {
+            // Esconde todas as abas
+            const abas = document.querySelectorAll(".aba");
+            abas.forEach((aba) => {
+                aba.classList.remove("ativa");
             });
-        }
 
-        function carregarContas() {
-            db.collection("contas").orderBy("vencimento", "desc").onSnapshot(snapshot => {
-                const corpo = document.getElementById("tabelaContas");
-                corpo.innerHTML = "";
-                let total = 0;
-                let qtd = 0;
+            // Mostra a aba clicada
+            document.getElementById(id).classList.add("ativa");
 
-                for (const key in contasCarregadas) delete contasCarregadas[key];
-
-                if (snapshot.empty) {
-                    corpo.innerHTML = `<tr><td colspan="6" class="empty">Nenhuma conta cadastrada.</td></tr>`;
-                } else {
-                    snapshot.forEach(doc => {
-                        const conta = doc.data();
-                        const id = doc.id;
-                        contasCarregadas[id] = { id, ...conta };
-
-                        const valor = parseFloat(conta.valor) || 0;
-                        total += valor;
-                        qtd++;
-
-                        const tr = document.createElement("tr");
-                        tr.innerHTML = `
-                            <td>${conta.descricao || "-"}</td>
-                            <td>${conta.categoria || "-"}</td>
-                            <td>${formatarData(conta.vencimento)}</td>
-                            <td>${formatarMoeda(valor)}</td>
-                            <td>${conta.status || "Pendente"}</td>
-                            <td class="acoes">
-                                <button class="btn-editar" onclick="editarConta('${id}')">Editar</button>
-                                <button class="btn-excluir" onclick="excluirConta('${id}')">Excluir</button>
-                            </td>
-                        `;
-                        corpo.appendChild(tr);
-                    });
-                }
-
-                document.getElementById("totalContas").textContent = formatarMoeda(total);
-                document.getElementById("qtdContas").textContent = qtd;
-            }, err => {
-                console.error("Erro ao carregar contas:", err);
+            // Atualiza o menu ativo
+            const menus = document.querySelectorAll(".menu a");
+            menus.forEach((menu) => {
+                menu.classList.remove("active");
             });
+            document.getElementById("menu-" + id).classList.add("active");
         }
 
-        function abrirModal() {
-            document.getElementById("modalTitulo").textContent = "Nova Conta";
-            document.getElementById("contaId").value = "";
-            document.getElementById("descricao").value = "";
-            document.getElementById("categoria").value = "Moradia";
-            document.getElementById("vencimento").value = "";
-            document.getElementById("valor").value = "";
-            document.getElementById("status").value = "Pendente";
-            document.getElementById("modalConta").style.display = "flex";
+        // 7) FUNÇÃO PARA EXIBIR MENSAGENS
+        function mostrarMensagem(texto, tipo) {
+            const msg = document.getElementById("mensagem");
+            msg.textContent = texto;
+            msg.className = "mensagem " + tipo;
+            msg.style.display = "block";
+
+            setTimeout(() => {
+                msg.style.display = "none";
+            }, 4000);
         }
 
-        function editarConta(id) {
-            const conta = contasCarregadas[id];
-            if (!conta) return;
-
-            document.getElementById("modalTitulo").textContent = "Editar Conta";
-            document.getElementById("contaId").value = conta.id;
-            document.getElementById("descricao").value = conta.descricao || "";
-            document.getElementById("categoria").value = conta.categoria || "Moradia";
-            document.getElementById("vencimento").value = conta.vencimento || "";
-            document.getElementById("valor").value = conta.valor || "";
-            document.getElementById("status").value = conta.status || "Pendente";
-            document.getElementById("modalConta").style.display = "flex";
-        }
-
-        function fecharModal() {
-            document.getElementById("modalConta").style.display = "none";
-        }
-
-        function salvarConta() {
-            const id = document.getElementById("contaId").value;
-            const descricao = document.getElementById("descricao").value.trim();
-            const categoria = document.getElementById("categoria").value;
-            const vencimento = document.getElementById("vencimento").value;
-            const valor = parseFloat(document.getElementById("valor").value);
-            const status = document.getElementById("status").value;
-
-            if (!descricao || !vencimento || isNaN(valor)) {
-                alert("Preencha todos os campos corretamente.");
-                return;
-            }
-
-            const dados = {
-                descricao,
-                categoria,
-                vencimento,
-                valor,
-                status,
-                atualizadoEm: firebase.firestore.FieldValue.serverTimestamp()
-            };
-
-            let promessa;
-            if (id) {
-                promessa = db.collection("contas").doc(id).update(dados);
-            } else {
-                dados.criadoEm = firebase.firestore.FieldValue.serverTimestamp();
-                promessa = db.collection("contas").add(dados);
-            }
-
-            promessa.then(() => {
-                fecharModal();
-            }).catch(err => {
-                alert("Erro ao salvar conta: " + err.message);
-            });
-        }
-
-        function excluirConta(id) {
-            if (!confirm("Tem certeza que deseja excluir esta conta?")) return;
-            db.collection("contas").doc(id).delete().catch(err => {
-                alert("Erro ao excluir conta: " + err.message);
-            });
-        }
-
+        // 8) FORMATAR VALOR EM REAIS
         function formatarMoeda(valor) {
-            return "R$ " + valor.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            return "R$ " + parseFloat(valor).toFixed(2).replace(".", ",");
         }
 
+        // 9) FORMATAR DATA
         function formatarData(data) {
             if (!data) return "-";
             const partes = data.split("-");
-            if (partes.length === 3) return `${partes[2]}/${partes[1]}/${partes[0]}`;
-            return data;
+            return partes[2] + "/" + partes[1] + "/" + partes[0];
         }
 
-        window.onclick = function(event) {
-            const modal = document.getElementById("modalConta");
-            if (event.target === modal) fecharModal();
-        };
+        // 10) LIMPAR FORMULÁRIO
+        function limparFormulario() {
+            document.getElementById("form-conta").reset();
+            document.getElementById("conta-id").value = "";
+            document.getElementById("titulo-form").textContent = "Nova Conta";
+            document.getElementById("btn-salvar").textContent = "💾 Salvar";
+        }
+
+        // 11) SALVAR CONTA (CREATE / UPDATE)
+        function salvarConta(event) {
+            event.preventDefault();
+
+            const id = document.getElementById("conta-id").value;
+            const descricao = document.getElementById("descricao").value.trim();
+            const valor = parseFloat(document.getElementById("valor").value);
+            const vencimento = document.getElementById("vencimento").value;
+            const status = document.getElementById("status").value;
+
+            const dados = {
+                descricao: descricao,
+                valor: valor,
+                vencimento: vencimento,
+                status: status,
+                userId: idUsuarioAtual,
+                atualizadoEm: new Date()
+            };
+
+            if (id) {
+                // EDITAR
+                contasRef.doc(id).update(dados)
+                    .then(() => {
+                        mostrarMensagem("Conta atualizada com sucesso!", "success");
+                        limparFormulario();
+                    })
+                    .catch((erro) => {
+                        mostrarMensagem("Erro ao atualizar: " + erro.message, "error");
+                    });
+            } else {
+                // CRIAR NOVO
+                dados.criadoEm = new Date();
+                contasRef.add(dados)
+                    .then(() => {
+                        mostrarMensagem("Conta cadastrada com sucesso!", "success");
+                        limparFormulario();
+                    })
+                    .catch((erro) => {
+                        mostrarMensagem("Erro ao cadastrar: " + erro.message, "error");
+                    });
+            }
+        }
+
+        // 12) EDITAR CONTA
+        function editarConta(id) {
+            const conta = contasCache.find((c) => c.id === id);
+            if (!conta) return;
+
+            document.getElementById("conta-id").value = conta.id;
+            document.getElementById("descricao").value = conta.descricao;
+            document.getElementById("valor").value = conta.valor;
+            document.getElementById("vencimento").value = conta.vencimento;
+            document.getElementById("status").value = conta.status;
+
+            document.getElementById("titulo-form").textContent = "Editar Conta";
+            document.getElementById("btn-salvar").textContent = "🔄 Atualizar";
+
+            // Volta para o topo do formulário
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
+        // 13) EXCLUIR CONTA
+        function excluirConta(id) {
+            if (confirm("Tem certeza que deseja excluir esta conta?")) {
+                contasRef.doc(id).delete()
+                    .then(() => {
+                        mostrarMensagem("Conta excluída com sucesso!", "success");
+                    })
+                    .catch((erro) => {
+                        mostrarMensagem("Erro ao excluir: " + erro.message, "error");
+                    });
+            }
+        }
+
+        // 14) LISTAR EM TEMPO REAL E SOMAR TOTAIS
+        function listarContasEmTempoReal() {
+            contasRef
+                .where("userId", "==", idUsuarioAtual)
+                .orderBy("criadoEm", "desc")
+                .onSnapshot((snapshot) => {
+                    contasCache = [];
+                    let total = 0;
+                    let pendentes = 0;
+                    let pagas = 0;
+
+                    let html = "";
+
+                    if (snapshot.empty) {
+                        html = `<tr><td colspan="5" style="text-align: center;">Nenhuma conta cadastrada.</td></tr>`;
+                    } else {
+                        snapshot.forEach((doc) => {
+                            const conta = doc.data();
+                            conta.id = doc.id;
+                            contasCache.push(conta);
+
+                            total += conta.valor || 0;
+
+                            if (conta.status === "Pago") {
+                                pagas++;
+                            } else {
+                                pendentes++;
+                            }
+
+                            const statusClass = conta.status === "Pago" ? "status-pago" : "status-pendente";
+
+                            html += `
+                                <tr>
+                                    <td>${conta.descricao}</td>
+                                    <td>${formatarMoeda(conta.valor)}</td>
+                                    <td>${formatarData(conta.vencimento)}</td>
+                                    <td class="${statusClass}">${conta.status}</td>
+                                    <td class="acoes">
+                                        <button class="btn btn-warning" onclick="editarConta('${conta.id}')">✏️ Editar</button>
+                                        <button class="btn btn-danger" onclick="excluirConta('${conta.id}')">🗑️ Excluir</button>
+                                    </td>
+                                </tr>
+                            `;
+                        });
+                    }
+
+                    document.getElementById("lista-contas").innerHTML = html;
+
+                    // Atualiza os totais
+                    document.getElementById("total-contas").textContent = formatarMoeda(total);
+                    document.getElementById("relatorio-total").textContent = formatarMoeda(total);
+                    document.getElementById("relatorio-pendentes").textContent = pendentes;
+                    document.getElementById("relatorio-pagas").textContent = pagas;
+                }, (erro) => {
+                    console.error("Erro ao listar contas:", erro);
+                    document.getElementById("lista-contas").innerHTML =
+                        `<tr><td colspan="5" style="text-align: center; color: red;">Erro ao carregar dados.</td></tr>`;
+                });
+        }
+
+        // 15) SAIR
+        function sair() {
+            auth.signOut()
+                .then(() => {
+                    window.location.href = "login.html";
+                })
+                .catch((erro) => {
+                    alert("Erro ao sair: " + erro.message);
+                });
+        }
     </script>
 </body>
 </html>
